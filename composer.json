@@ -1,0 +1,6 @@
+{
+    "name": "root/black-box",
+    "require": {
+        "nikic/php-parser": "^3.1"
+    }
+}
