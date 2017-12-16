@@ -59,13 +59,12 @@ class AlgorithmBox implements AlgorithmContract
 
         $factory->setAlgorithmData($algorithmData);
         $this->factory = $factory;
-        $this->run();
     }
 
     /**
-     * Запуск алгоритма на выполнение
+     * @param null $inputData
      */
-    public function run()
+    public function run($inputData = null)
     {
         StrUtil::writeln(sprintf('Run algorithm %s', $this->name));
     }
