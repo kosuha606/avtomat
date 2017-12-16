@@ -2,7 +2,9 @@
 
 namespace Avtomat\Box;
 
-class StartBox
+use Avtomat\Contracts\BoxContract;
+
+class StartBox implements BoxContract
 {
 
 }

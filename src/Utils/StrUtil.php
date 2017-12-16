@@ -2,7 +2,13 @@
 
 namespace Avtomat\Utils;
 
-class StrUtil
+use Avtomat\Contracts\UtilContract;
+
+/**
+ * Набор помошников для работы со сроками
+ * @package Avtomat\Utils
+ */
+class StrUtil implements UtilContract
 {
     public static function writeln($message)
     {

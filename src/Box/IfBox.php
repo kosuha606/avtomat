@@ -2,10 +2,12 @@
 
 namespace Avtomat\Box;
 
+use Avtomat\Contracts\BoxContract;
+
 /**
  * Условие
  */
-class IfBox
+class IfBox implements BoxContract
 {
     public function __construct()
     {

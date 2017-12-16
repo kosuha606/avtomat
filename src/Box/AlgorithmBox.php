@@ -2,35 +2,71 @@
 
 namespace Avtomat\Box;
 
-class AlgorithmBox
+use Avtomat\Contracts\AlgorithmContract;
+use Avtomat\Contracts\BoxFactoryInterface;
+use Avtomat\Exception\AlgoBadConfigException;
+use Avtomat\Exception\AlgoFileNotFoundException;
+use Avtomat\Exception\NoAlgoNameException;
+use Avtomat\Utils\StrUtil;
+
+/**
+ * Алгоритм - основная точка выхода
+ * для запуска всех алгоритмов
+ *
+ * @package Avtomat\Box
+ */
+class AlgorithmBox implements AlgorithmContract
 {
-    private $map = [];
-    private $relations = [];
+    /**
+     * @var string
+     */
+    private $name = 'undefined';
 
-    public function add(BlackBox $box)
+    /**
+     * @var string
+     */
+    private $algoDir = 'algorithms';
+
+    /**
+     * @var BoxFactoryInterface
+     */
+    private $factory;
+
+    /**
+     * AlgorithmBox constructor.
+     * @param $algoName
+     * @throws AlgoBadConfigException
+     * @throws AlgoFileNotFoundException
+     * @throws NoAlgoNameException
+     */
+    public function __construct($algoName, BoxFactoryInterface $factory)
     {
-        $this->map[$box->getId()] = $box;
+        if (!$algoName) {
+            throw new NoAlgoNameException('Алгоритм обязательно должен иметь имя!');
+        }
+        $this->name = $algoName;
+
+        $algorithmPath = $this->algoDir.'/'.$algoName.'.json';
+        if (!is_file($algorithmPath)) {
+            throw new AlgoFileNotFoundException('Файл алгоритма не найден!');
+        }
+
+        $algorithmDataText = file_get_contents($algorithmPath);
+        $algorithmData = json_decode($algorithmDataText, true);
+        if (!$algorithmData['objects'] || !$algorithmData['relations']) {
+            throw new AlgoBadConfigException('Алгоритм не правильно сконфигурирован! отсутствуют ключи objects или relations');
+        }
+
+        $factory->setAlgorithmData($algorithmData);
+        $this->factory = $factory;
+        $this->run();
     }
 
-    public function relation(
-        BlackBox $box1,
-        $label1,
-        BlackBox $box2,
-        $label2
-    ) {
-        $boxLabel1 = $box1->getId().'_'.$label1;
-        $boxLabel2 = $box2->getId().'_'.$label2;
-        $this->relations[$boxLabel1] = $boxLabel2;
-        $this->relations[$boxLabel2] = $boxLabel1;
-    }
-
+    /**
+     * Запуск алгоритма на выполнение
+     */
     public function run()
     {
-        writeln('Run algorithm');
-    }
-
-    public function dump()
-    {
-        var_dump($this->relations);
+        StrUtil::writeln(sprintf('Run algorithm %s', $this->name));
     }
 }

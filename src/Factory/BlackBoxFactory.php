@@ -2,8 +2,15 @@
 
 namespace Avtomat\Factory;
 
-class BlackBoxFactory
+use Avtomat\Contracts\BoxFactoryInterface;
+
+class BlackBoxFactory implements BoxFactoryInterface
 {
+    public function setAlgorithmData($data)
+    {
+        // TODO: Implement setAlgorithmData() method.
+    }
+
     private function generateId()
     {
         if (function_exists('com_create_guid') === true) {

@@ -2,10 +2,12 @@
 
 namespace Avtomat\Box;
 
+use Avtomat\Contracts\BoxContract;
+
 /**
  * Базовый класс для всех черных ящиков
  */
-class BlackBox
+class BlackBox implements BoxContract
 {
     protected $id;
     protected $labels = [

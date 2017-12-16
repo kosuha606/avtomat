@@ -2,7 +2,9 @@
 
 namespace Avtomat\Box;
 
-class EqualConstBox
+use Avtomat\Contracts\BoxContract;
+
+class EqualConstBox implements BoxContract
 {
 
 }
