@@ -15,7 +15,7 @@ use Avtomat\Utils\StrUtil;
  *
  * @package Avtomat\Box
  */
-class AlgorithmBox implements AlgorithmContract
+class AlgorithmBox extends Box implements AlgorithmContract
 {
     /**
      * @var string
@@ -67,5 +67,21 @@ class AlgorithmBox implements AlgorithmContract
     public function run($inputData = null)
     {
         StrUtil::writeln(sprintf('Run algorithm %s', $this->name));
+        /**
+         * 1. Из factory получить объект Start
+         * 2. Передать inputData в Start
+         * 3. Получить метку input следующего объекта
+         * 4. Передать управление на в след объект
+         * 5. Повторять 3 и 4 пока не достигнем объект End
+         * 6. Вернуть результат из объекта End
+         */
+
+        $startBox = $this->findStart();
+        return $startBox->run($inputData);
+    }
+
+    private function findStart()
+    {
+
     }
 }

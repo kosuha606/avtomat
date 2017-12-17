@@ -7,13 +7,23 @@ use Avtomat\Contracts\BoxContract;
 /**
  * Базовый класс для всех черных ящиков
  */
-class BlackBox implements BoxContract
+class Box implements BoxContract
 {
     protected $id;
     protected $labels = [
         'input',
         'output',
     ];
+
+    function run()
+    {
+
+    }
+
+    function getNextBox()
+    {
+
+    }
 
     function getId()
     {

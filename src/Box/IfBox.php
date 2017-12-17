@@ -7,7 +7,7 @@ use Avtomat\Contracts\BoxContract;
 /**
  * Условие
  */
-class IfBox implements BoxContract
+class IfBox extends Box implements BoxContract
 {
     public function __construct()
     {
