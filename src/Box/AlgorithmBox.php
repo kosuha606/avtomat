@@ -4,6 +4,7 @@ namespace Avtomat\Box;
 
 use Avtomat\Contracts\AlgorithmContract;
 use Avtomat\Contracts\BoxFactoryInterface;
+use Avtomat\DependencyInjection\DI;
 use Avtomat\Exception\AlgoBadConfigException;
 use Avtomat\Exception\AlgoFileNotFoundException;
 use Avtomat\Exception\NoAlgoNameException;
@@ -39,7 +40,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
      * @throws AlgoFileNotFoundException
      * @throws NoAlgoNameException
      */
-    public function __construct($algoName, BoxFactoryInterface $factory)
+    public function __construct($algoName)
     {
         if (!$algoName) {
             throw new NoAlgoNameException('Алгоритм обязательно должен иметь имя!');
@@ -57,6 +58,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
             throw new AlgoBadConfigException('Алгоритм не правильно сконфигурирован! отсутствуют ключи objects или relations');
         }
 
+        $factory = DI::get('factory');
         $factory->setAlgorithmData($algorithmData);
         $this->factory = $factory;
     }
@@ -67,21 +69,25 @@ class AlgorithmBox extends Box implements AlgorithmContract
     public function run($inputData = null)
     {
         StrUtil::writeln(sprintf('Run algorithm %s', $this->name));
-        /**
-         * 1. Из factory получить объект Start
-         * 2. Передать inputData в Start
-         * 3. Получить метку input следующего объекта
-         * 4. Передать управление на в след объект
-         * 5. Повторять 3 и 4 пока не достигнем объект End
-         * 6. Вернуть результат из объекта End
-         */
 
         $startBox = $this->findStart();
         return $startBox->run($inputData);
     }
 
+    /**
+     * @return StartBox|null
+     */
     private function findStart()
     {
+        $allObjects = $this->factory->getObjects();
+        $startBox = null;
+        foreach ($allObjects as $object) {
+            if ($object instanceof StartBox) {
+                $startBox = $object;
+                break;
+            }
+        }
 
+        return $startBox;
     }
 }

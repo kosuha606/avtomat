@@ -3,6 +3,8 @@
 namespace Avtomat\Box;
 
 use Avtomat\Contracts\BoxContract;
+use Avtomat\DependencyInjection\DI;
+use Avtomat\Utils\StrUtil;
 
 /**
  * Условие
@@ -15,5 +17,11 @@ class IfBox extends Box implements BoxContract
         $this->labels[] = 'data';
         $this->labels[] = 'then';
         $this->labels[] = 'else';
+    }
+
+    public function run($inputData)
+    {
+        StrUtil::writeln('If is working');
+        DI::get('controller')->go($this, 'output');
     }
 }

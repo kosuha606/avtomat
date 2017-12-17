@@ -2,42 +2,85 @@
 
 namespace Avtomat\Factory;
 
+use Avtomat\Box\Box;
 use Avtomat\Contracts\BoxFactoryInterface;
+use Avtomat\Exception\NotFoundBlackBoxException;
 
+/**
+ * Class BlackBoxFactory
+ * @package Avtomat\Factory
+ */
 class BlackBoxFactory implements BoxFactoryInterface
 {
+    /**
+     * @var
+     */
+    private $data;
+
+    /**
+     * @var array
+     */
+    private $objects = [];
+
+    /**
+     * @var array
+     */
+    private $relations = [];
+
+    /**
+     * @param $data
+     */
     public function setAlgorithmData($data)
     {
-        // TODO: Implement setAlgorithmData() method.
-    }
+        $this->data = $data;
+        $this->relations = $data['relations'];
 
-    private function generateId()
-    {
-        if (function_exists('com_create_guid') === true) {
-            return trim(com_create_guid(), '{}');
+        foreach ($data['objects'] as $object) {
+            $this->objects[$object] = $this->create($object);
         }
-
-        return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535),
-            mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
     }
 
     /**
-     * @param type $boxName
-     * @return \BlackBox
+     * @param $relation
+     * @return mixed
+     */
+    public function getObjectByRelation($relation)
+    {
+        if (isset($this->relations[$relation])) {
+            $split = explode('_', $this->relations[$relation]);
+            return $this->objects[$split[0]];
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getObjects()
+    {
+        return $this->objects;
+    }
+
+    /**
+     * @param $objectName
+     * @return mixed
      * @throws NotFoundBlackBoxException
      */
-    public function create($boxName)
+    public function create($objectName)
     {
-        if (class_exists($boxName.'Box')) {
-            $objectClass = $boxName.'Box';
+        $split = explode('::', $objectName);
+        $boxName = $split[0];
+        $boxId = $split[1];
+        $namespace = 'Avtomat\\Box\\';
+        $objectClass = $namespace.$boxName.'Box';
+        if (class_exists($objectClass)) {
             $object = new $objectClass();
-            if ($object instanceof BlackBox) {
-                $object->setId($this->generateId());
+            if ($object instanceof Box) {
+                $object->setId($boxId);
 
                 return $object;
             }
         }
 
-        throw new NotFoundBlackBoxException(sprintf('Попытка создвать BlackBox c не известным именем %s', $boxName));
+        throw new NotFoundBlackBoxException(sprintf('Попытка создвать BlackBox c не известным именем %s', $objectClass));
     }
 }

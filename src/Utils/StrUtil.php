@@ -10,6 +10,9 @@ use Avtomat\Contracts\UtilContract;
  */
 class StrUtil implements UtilContract
 {
+    /**
+     * @param $message
+     */
     public static function writeln($message)
     {
         echo $message."\n";
