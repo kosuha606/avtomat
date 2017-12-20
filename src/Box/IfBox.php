@@ -21,7 +21,9 @@ class IfBox extends Box implements BoxContract
 
     public function run($inputData)
     {
-        StrUtil::writeln('If is working');
+        StrUtil::writeln('If box');
+        DI::get('controller')->call($this, 'data');
+        DI::get('controller')->call($this, 'comparator');
         DI::get('controller')->go($this, 'output');
     }
 }

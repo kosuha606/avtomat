@@ -13,6 +13,6 @@ class EndBox extends Box implements BoxContract
 {
     public function run($inputData)
     {
-        StrUtil::writeln('Algorithm finished!');
+        StrUtil::writeln('End box');
     }
 }
