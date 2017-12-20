@@ -13,7 +13,7 @@ class ConstBox extends Box implements BoxContract
 {
     public function run($inputData)
     {
-        StrUtil::writeln('Const box');
+        StrUtil::writeln('Блок получения костанты constant');
         $this->getResultsStorage()->write($this, 'constant');
     }
 }

@@ -13,7 +13,7 @@ class IfBox extends Box implements BoxContract
 {
     public function run($inputData)
     {
-        StrUtil::writeln('If box');
+        StrUtil::writeln('Блок условия');
         $comparator = $this->getController()->call($this, 'comparator');
         $self = $this;
         $this->getController()->go($this, 'output', function($output) use ($self, $comparator) {
