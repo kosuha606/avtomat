@@ -16,11 +16,14 @@ class AlgorithmController
      * @param $box
      * @param $label
      */
-    public function go($box, $label)
+    public function go($box, $label, $callBack = null)
     {
         StrUtil::writeln('--->Go to label--->');
         $factory = DI::get('factory');
         $object = $factory->getObjectByRelation($box->getName().'_'.$label);
+        if ($callBack && is_callable($callBack)) {
+            $callBack($object);
+        }
         $object->run($box->getResult());
     }
 
@@ -35,5 +38,7 @@ class AlgorithmController
         $factory = DI::get('factory');
         $object = $factory->getObjectByRelation($box->getName().'_'.$label);
         $object->run($box->getResult());
+
+        return $object;
     }
 }

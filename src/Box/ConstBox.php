@@ -14,5 +14,6 @@ class ConstBox extends Box implements BoxContract
     public function run($inputData)
     {
         StrUtil::writeln('Const box');
+        $this->getResultsStorage()->write($this, 'constant');
     }
 }

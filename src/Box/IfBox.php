@@ -11,19 +11,16 @@ use Avtomat\Utils\StrUtil;
  */
 class IfBox extends Box implements BoxContract
 {
-    public function __construct()
-    {
-        $this->labels[] = 'comparator';
-        $this->labels[] = 'data';
-        $this->labels[] = 'then';
-        $this->labels[] = 'else';
-    }
-
     public function run($inputData)
     {
         StrUtil::writeln('If box');
-        DI::get('controller')->call($this, 'data');
-        DI::get('controller')->call($this, 'comparator');
-        DI::get('controller')->go($this, 'output');
+        $comparator = $this->getController()->call($this, 'comparator');
+        $self = $this;
+        $this->getController()->go($this, 'output', function($output) use ($self, $comparator) {
+            $self->getInputsStorage()->write(
+                $output,
+                (string)$self->getResultsStorage()->read($comparator)
+            );
+        });
     }
 }

@@ -18,14 +18,7 @@ class StartBox extends Box implements BoxContract
     public function run($inputData)
     {
         StrUtil::writeln('Start box');
-        DI::get('controller')->go($this, 'output');
-    }
-
-    /**
-     * @param $inputData
-     */
-    public function setInputData($inputData)
-    {
-
+        $this->getResultsStorage()->write($this, 'start data');
+        $this->getController()->go($this, 'output');
     }
 }

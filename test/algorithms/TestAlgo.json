@@ -2,14 +2,14 @@
   "objects": [
     "Start::1",
     "Const::1",
-    "EqualConst::1",
+    "ConstComparator::1",
     "If::1",
     "End::1"
   ],
   "relations": {
     "Start::1_output": "If::1_input",
-    "If::1_data": "Const::1_output",
-    "If::1_comparator": "EqualConst::1_output",
+    "If::1_comparator": "ConstComparator::1_input",
+    "ConstComparator::1_data": "Const::1_output",
     "If::1_output": "End::1_inut"
   }
 }

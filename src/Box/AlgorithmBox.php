@@ -58,9 +58,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
             throw new AlgoBadConfigException('Алгоритм не правильно сконфигурирован! отсутствуют ключи objects или relations');
         }
 
-        $factory = DI::get('factory');
-        $factory->setAlgorithmData($algorithmData);
-        $this->factory = $factory;
+        $this->getFactory()->setAlgorithmData($algorithmData);
     }
 
     /**
@@ -80,7 +78,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
      */
     private function findStart()
     {
-        $allObjects = $this->factory->getObjects();
+        $allObjects = $this->getFactory()->getObjects();
         $startBox = null;
         foreach ($allObjects as $object) {
             if ($object instanceof StartBox) {

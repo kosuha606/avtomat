@@ -3,6 +3,7 @@
 namespace Avtomat\Box;
 
 use Avtomat\Contracts\BoxContract;
+use Avtomat\Contracts\StorageContract;
 use Avtomat\DependencyInjection\DI;
 use Avtomat\Utils\StrUtil;
 
@@ -73,5 +74,43 @@ class Box implements BoxContract
     public function getResult()
     {
         return $this->result;
+    }
+
+    /**
+     * @param $serviceId
+     * @return mixed|null
+     */
+    public function get($serviceId)
+    {
+        return DI::get($serviceId);
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getController()
+    {
+        return $this->get('controller');
+    }
+
+    /**
+     * @return StorageContract
+     */
+    public function getResultsStorage()
+    {
+        return $this->get('results_storage');
+    }
+
+    /**
+     * @return StorageContract
+     */
+    public function getInputsStorage()
+    {
+        return $this->get('inputs_storage');
+    }
+
+    public function getFactory()
+    {
+        return $this->get('factory');
     }
 }

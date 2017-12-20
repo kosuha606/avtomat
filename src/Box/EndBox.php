@@ -14,5 +14,6 @@ class EndBox extends Box implements BoxContract
     public function run($inputData)
     {
         StrUtil::writeln('End box');
+        StrUtil::writeln('Результат вычислений равен = '.$this->getInputsStorage()->read($this));
     }
 }
