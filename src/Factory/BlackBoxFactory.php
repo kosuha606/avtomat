@@ -36,7 +36,7 @@ class BlackBoxFactory implements BoxFactoryInterface
         $this->relations = $data['relations'];
 
         foreach ($data['objects'] as $object) {
-            $this->objects[$object] = $this->create($object);
+            $this->objects[$object['name']] = $this->create($object);
         }
     }
 
@@ -65,18 +65,18 @@ class BlackBoxFactory implements BoxFactoryInterface
      * @return mixed
      * @throws NotFoundBlackBoxException
      */
-    public function create($objectName)
+    public function create($object)
     {
+        $objectName = $object['name'];
+        $arguments = $object['arguments'];
         $split = explode('::', $objectName);
         $boxName = $split[0];
         $boxId = $split[1];
         $namespace = 'Avtomat\\Box\\';
         $objectClass = $namespace.$boxName.'Box';
         if (class_exists($objectClass)) {
-            $object = new $objectClass();
+            $object = new $objectClass($boxId, $arguments);
             if ($object instanceof Box) {
-                $object->setId($boxId);
-
                 return $object;
             }
         }

@@ -14,6 +14,7 @@ class Box implements BoxContract
 {
     protected $id;
     private $result;
+    private $arguments;
     protected $labels = [
         'input',
         'output',
@@ -22,6 +23,13 @@ class Box implements BoxContract
      * @var AlgorithmBox
      */
     private $baseAlogrithm;
+
+    public function __construct($id, $arguments)
+    {
+        $this->id = $id;
+        $this->arguments = $arguments;
+        StrUtil::writeln('Аргументы ('.$this->getName().'): '.json_encode($arguments));
+    }
 
     function run($inputData)
     {
