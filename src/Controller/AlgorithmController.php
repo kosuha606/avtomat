@@ -24,7 +24,7 @@ class AlgorithmController
         if ($callBack && is_callable($callBack)) {
             $callBack($object);
         }
-        $object->run($box->getResult());
+        $object->run();
     }
 
     /**
@@ -37,7 +37,7 @@ class AlgorithmController
         StrUtil::writeln('<---Call by '.$box->getName().'<---');
         $factory = DI::get('factory');
         $object = $factory->getObjectByRelation($box->getName().'_'.$label);
-        $object->run($box->getResult());
+        $object->run();
 
         return $object;
     }

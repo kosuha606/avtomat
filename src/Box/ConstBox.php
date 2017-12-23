@@ -11,9 +11,10 @@ use Avtomat\Utils\StrUtil;
  */
 class ConstBox extends Box implements BoxContract
 {
-    public function run($inputData)
+    public function run()
     {
-        StrUtil::writeln('Блок получения костанты constant');
-        $this->getResultsStorage()->write($this, 'constant');
+        $constant = $this->nextArgument();
+        StrUtil::writeln('Блок получения костанты '.$constant);
+        $this->getResultsStorage()->write($this, $constant);
     }
 }

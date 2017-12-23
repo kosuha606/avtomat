@@ -11,13 +11,14 @@ use Avtomat\Utils\StrUtil;
  */
 class ConstComparatorBox extends Box implements BoxContract
 {
-    public function run($inputData)
+    public function run()
     {
-        StrUtil::writeln('Сравниваю данный от метки data с константой constant');
+        $constant = $this->nextArgument();
+        StrUtil::writeln('Сравниваю данный от метки data с константой '.$constant);
         $data = $this->getController()->call($this, 'data');
         $this->getResultsStorage()->write(
             $this,
-            $this->getResultsStorage()->read($data) === 'constant'
+            $this->getResultsStorage()->read($data) === $constant
         );
     }
 }

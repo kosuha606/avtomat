@@ -11,9 +11,8 @@ use Avtomat\Utils\StrUtil;
  */
 class EndBox extends Box implements BoxContract
 {
-    public function run($inputData)
+    public function run()
     {
         StrUtil::writeln('Блок конца алгоритма');
-        StrUtil::writeln('Результат вычислений равен = '.$this->getInputsStorage()->read($this));
     }
 }

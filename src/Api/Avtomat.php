@@ -2,6 +2,7 @@
 
 namespace Avtomat\Api;
 
+use Avtomat\Box\AlgorithmBox;
 use Avtomat\Contracts\ApiContract;
 
 /**
@@ -30,5 +31,16 @@ class Avtomat implements ApiContract
     public function changeAlgorithm($algoName, $config)
     {
         // TODO: Implement changeAlgorithm() method.
+    }
+
+    /**
+     * @param $algorithmName
+     * @param $inputData
+     */
+    public static function run($algorithmName, $inputData)
+    {
+        $algorithm = new AlgorithmBox($algorithmName);
+        $algorithm->setInputData($inputData);
+        $algorithm->run();
     }
 }

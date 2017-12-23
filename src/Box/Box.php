@@ -12,18 +12,26 @@ use Avtomat\Utils\StrUtil;
  */
 class Box implements BoxContract
 {
+    /**
+     * @var int
+     */
     protected $id;
-    private $result;
-    private $arguments;
-    protected $labels = [
-        'input',
-        'output',
-    ];
+
+    /**
+     * @var array
+     */
+    protected $arguments = [];
+
     /**
      * @var AlgorithmBox
      */
     private $baseAlogrithm;
 
+    /**
+     * Box constructor.
+     * @param $id
+     * @param $arguments
+     */
     public function __construct($id, $arguments)
     {
         $this->id = $id;
@@ -31,57 +39,73 @@ class Box implements BoxContract
         StrUtil::writeln('Аргументы ('.$this->getName().'): '.json_encode($arguments));
     }
 
-    function run($inputData)
+    /**
+     * @param $inputData
+     */
+    function run()
     {
         StrUtil::writeln(sprintf('Run is not implemented in class %s! Check this class!', get_class($this)));
-
     }
 
+    /**
+     * @return mixed|string
+     */
+    public function nextArgument()
+    {
+        if (count($this->arguments) > 0) {
+            return reset($this->arguments);
+        }
+        return 'none';
+    }
+
+    /**
+     * @return array
+     */
+    public function allArguments()
+    {
+        return $this->arguments;
+    }
+
+    /**
+     * @param AlgorithmBox $baseAlgorithm
+     */
     public function setBaseAlgorithm(AlgorithmBox $baseAlgorithm)
     {
         $this->baseAlogrithm = $baseAlgorithm;
     }
 
+    /**
+     * @return AlgorithmBox
+     */
     public function getBaseAlgorithm()
     {
         return $this->baseAlogrithm;
     }
 
-    function getNextBox()
-    {
-
-    }
-
+    /**
+     * @return int
+     */
     function getId()
     {
         return $this->id;
     }
 
-    function getLabels()
-    {
-        return $this->labels;
-    }
-
+    /**
+     * @param $id
+     */
     function setId($id)
     {
         $this->id = $id;
     }
 
-    function setLabels($labels)
-    {
-        $this->labels = $labels;
-    }
-
+    /**
+     * @return string
+     */
     public function getName()
     {
         $path = explode('\\', static::class);
         $className = array_pop($path);
         return str_replace('Box', '', $className).'::'.$this->getId();
-    }
-
-    public function getResult()
-    {
-        return $this->result;
     }
 
     /**
@@ -117,6 +141,9 @@ class Box implements BoxContract
         return $this->get('inputs_storage');
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getFactory()
     {
         return $this->get('factory');

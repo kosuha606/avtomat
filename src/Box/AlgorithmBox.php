@@ -29,9 +29,9 @@ class AlgorithmBox extends Box implements AlgorithmContract
     private $algoDir = 'algorithms';
 
     /**
-     * @var BoxFactoryInterface
+     * @var mixed
      */
-    private $factory;
+    private $inputData;
 
     /**
      * AlgorithmBox constructor.
@@ -64,13 +64,28 @@ class AlgorithmBox extends Box implements AlgorithmContract
     /**
      * @param null $inputData
      */
-    public function run($inputData = null)
+    public function run()
     {
         StrUtil::writeln(sprintf('Run algorithm %s', $this->name));
         StrUtil::writeln('==============================');
 
+        $inputData = $this->inputData;
+        $self = $this;
         $startBox = $this->findStart();
-        return $startBox->run($inputData);
+        $this->getController()->go($startBox, 'input', function($output) use ($self, $inputData) {
+            $self->getInputsStorage()->write(
+                $output,
+                $inputData
+            );
+        });
+    }
+
+    /**
+     * @param $inputData
+     */
+    public function setInputData($inputData)
+    {
+        $this->inputData = $inputData;
     }
 
     /**

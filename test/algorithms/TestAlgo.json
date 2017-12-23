@@ -1,12 +1,13 @@
 {
   "objects": [
     {"name": "Start::1", "arguments": []},
-    {"name": "Const::1", "arguments": ["2"]},
-    {"name": "ConstComparator::1", "arguments": []},
+    {"name": "Const::1", "arguments": ["constant1"]},
+    {"name": "ConstComparator::1", "arguments": ["constant1"]},
     {"name": "If::1", "arguments": []},
     {"name": "End::1", "arguments": []}
   ],
   "relations": {
+    "Start::1_input": "Start::1_output",
     "Start::1_output": "If::1_input",
     "If::1_comparator": "ConstComparator::1_input",
     "ConstComparator::1_data": "Const::1_output",

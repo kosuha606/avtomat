@@ -11,15 +11,17 @@ use Avtomat\Utils\StrUtil;
  */
 class IfBox extends Box implements BoxContract
 {
-    public function run($inputData)
+    public function run()
     {
         StrUtil::writeln('Блок условия');
         $comparator = $this->getController()->call($this, 'comparator');
         $self = $this;
-        $this->getController()->go($this, 'output', function($output) use ($self, $comparator) {
+        $result = $self->getResultsStorage()->read($comparator);
+        StrUtil::writeln('Результат вычислений равен = '.($result ? 'РАВНЫ' : 'НЕРАВНЫ'));
+        $this->getController()->go($this, 'output', function($output) use ($self, $comparator, $result) {
             $self->getInputsStorage()->write(
                 $output,
-                (string)$self->getResultsStorage()->read($comparator)
+                $result
             );
         });
     }
