@@ -17,9 +17,11 @@ class Avtomat implements ApiContract
      * Возвращает все доступные для использования
      * в алгоритмах объекты
      */
-    public function getAvailableObjects()
+    public static function getAvailableObjects()
     {
-        // TODO: Implement getAvailableObjects() method.
+        return [
+            'all objects'
+        ];
     }
 
     /**

@@ -1,3 +1,11 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require '../vendor/autoload.php';
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,6 +131,10 @@
                 [],
                 [makePort("OUT", false)]);
 
+            makeTemplate("IF", "", "forestgreen",
+                [makePort("input", true), makePort("data", true), makePort("comparator", true)],
+                [makePort("then", true), makePort("else", true)]);
+
             makeTemplate("Join", "", "mediumorchid",
                 [makePort("L", true), makePort("R", true)],
                 [makePort("UL", false), makePort("ML", false), makePort("M", false), makePort("MR", false), makePort("UR", false)]);
@@ -176,6 +188,12 @@
         <tr>
             <td width="20%" valign="top">
                 <h1>Классы:</h1>
+                <?php
+                $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
+                foreach ($objects as $object) {
+                    echo '<li>'.$object.'</li>';
+                }
+                ?>
             </td>
             <td>
                 <div id="myDiagramDiv" style="border: solid 1px black; width: 100%; height: 600px"></div>
@@ -185,8 +203,8 @@
 
     <div>
         <div>
-            <button id="SaveButton" onclick="save()">Save</button>
-            <button onclick="load()">Load</button>
+            <button id="SaveButton" onclick="save()">Сохранить</button>
+            <button onclick="load()">Загрузить</button>
         </div>
         <textarea id="mySavedModel" style="width:100%;height:300px">
 { "class": "go.GraphLinksModel",
@@ -196,6 +214,7 @@
   "nodeDataArray": [
 {"key":1, "type":"Table", "name":"Product"},
 {"key":2, "type":"Table", "name":"Sales"},
+{"key":5, "type":"IF", "name":"if"},
 {"key":3, "type":"Table", "name":"Period"},
 {"key":4, "type":"Table", "name":"Store"},
 {"key":11, "type":"Join", "name":"Product, Class"},
