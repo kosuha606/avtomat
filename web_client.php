@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 
 require 'vendor/autoload.php';
 
+$objects = \Avtomat\Api\Avtomat::getAvailableObjects();
 ?>
 <!DOCTYPE html>
 <html>
@@ -127,37 +128,17 @@ require 'vendor/autoload.php';
                 myDiagram.nodeTemplateMap.add(typename, node);
             }
 
-            makeTemplate("Table", "", "forestgreen",
-                [],
-                [makePort("OUT", false)]);
-
-            makeTemplate("IF", "", "forestgreen",
+            <?php
+                foreach ($objects as $object) {
+                    ?>
+            makeTemplate("<?= $object->getTitle() ?>", "", "forestgreen",
                 [makePort("input", true), makePort("data", true), makePort("comparator", true)],
                 [makePort("then", true), makePort("else", true)]);
+                    <?php
+                }
+            ?>
 
-            makeTemplate("Join", "", "mediumorchid",
-                [makePort("L", true), makePort("R", true)],
-                [makePort("UL", false), makePort("ML", false), makePort("M", false), makePort("MR", false), makePort("UR", false)]);
 
-            makeTemplate("Project", "", "darkcyan",
-                [makePort("", true)],
-                [makePort("OUT", false)]);
-
-            makeTemplate("Filter", "", "cornflowerblue",
-                [makePort("", true)],
-                [makePort("OUT", false),makePort("INV", false)]);
-
-            makeTemplate("Group", "", "mediumpurple",
-                [makePort("", true)],
-                [makePort("OUT", false)]);
-
-            makeTemplate("Sort", "", "sienna",
-                [makePort("", true)],
-                [makePort("OUT", false)]);
-
-            makeTemplate("Export", "", "darkred",
-                [makePort("", true)],
-                []);
 
             myDiagram.linkTemplate =
                 $(go.Link,
@@ -189,7 +170,7 @@ require 'vendor/autoload.php';
             <td width="20%" valign="top">
                 <h1>Классы:</h1>
                 <?php
-                $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
+
                 foreach ($objects as $object) {
                     echo '<li>'.$object->getTitle().'</li>';
                 }
@@ -212,8 +193,8 @@ require 'vendor/autoload.php';
   "linkFromPortIdProperty": "frompid",
   "linkToPortIdProperty": "topid",
   "nodeDataArray": [
-{"key":5, "type":"IF", "name":"if"},
-{"key":6, "type":"IF", "name":"if"}
+{"key":5, "type":"If", "name":"if"},
+{"key":6, "type":"If", "name":"if"}
   ],
   "linkDataArray": [
   ]}

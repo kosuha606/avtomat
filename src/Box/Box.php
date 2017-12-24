@@ -12,6 +12,10 @@ use Avtomat\Utils\StrUtil;
  */
 class Box implements BoxContract
 {
+    public $inputLabels = ['input'];
+
+    public $outputLabels = ['output'];
+
     /**
      * @var string
      */
@@ -45,7 +49,9 @@ class Box implements BoxContract
 
     public function getTitle()
     {
-        return $this->title;
+        $path = explode('\\', static::class);
+        $className = array_pop($path);
+        return str_replace('Box', '', $className);
     }
 
     /**

@@ -11,8 +11,6 @@ use Avtomat\Utils\StrUtil;
  */
 class EndBox extends Box implements BoxContract
 {
-    public $title = 'End';
-
     public function run()
     {
         StrUtil::debug('Блок конца алгоритма');

@@ -11,7 +11,9 @@ use Avtomat\Utils\StrUtil;
  */
 class IfBox extends Box implements BoxContract
 {
-    public $title = 'If';
+    public $inputLabels = ['input', 'data', 'comparator'];
+
+    public $outputLabels = ['then', 'else'];
 
     public function run()
     {

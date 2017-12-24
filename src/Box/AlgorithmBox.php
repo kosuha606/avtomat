@@ -18,8 +18,6 @@ use Avtomat\Utils\StrUtil;
  */
 class AlgorithmBox extends Box implements AlgorithmContract
 {
-    public $title = 'Agorithm';
-
     /**
      * @var string
      */
