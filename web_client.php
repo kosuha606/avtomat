@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
 ?>
 <!DOCTYPE html>
@@ -191,7 +191,7 @@ require '../vendor/autoload.php';
                 <?php
                 $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
                 foreach ($objects as $object) {
-                    echo '<li>'.$object.'</li>';
+                    echo '<li>'.$object->getTitle().'</li>';
                 }
                 ?>
             </td>
@@ -212,39 +212,10 @@ require '../vendor/autoload.php';
   "linkFromPortIdProperty": "frompid",
   "linkToPortIdProperty": "topid",
   "nodeDataArray": [
-{"key":1, "type":"Table", "name":"Product"},
-{"key":2, "type":"Table", "name":"Sales"},
 {"key":5, "type":"IF", "name":"if"},
-{"key":3, "type":"Table", "name":"Period"},
-{"key":4, "type":"Table", "name":"Store"},
-{"key":11, "type":"Join", "name":"Product, Class"},
-{"key":12, "type":"Join", "name":"Period"},
-{"key":13, "type":"Join", "name":"Store"},
-{"key":21, "type":"Project", "name":"Product, Class"},
-{"key":31, "type":"Filter", "name":"Boston, Jan2014"},
-{"key":32, "type":"Filter", "name":"Boston, 2014"},
-{"key":41, "type":"Group", "name":"Sales"},
-{"key":42, "type":"Group", "name":"Total Sales"},
-{"key":51, "type":"Join", "name":"Product Name"},
-{"key":61, "type":"Sort", "name":"Product Name"},
-{"key":71, "type":"Export", "name":"File"}
+{"key":6, "type":"IF", "name":"if"}
   ],
   "linkDataArray": [
-{"from":1, "frompid":"OUT", "to":11, "topid":"L"},
-{"from":2, "frompid":"OUT", "to":11, "topid":"R"},
-{"from":3, "frompid":"OUT", "to":12, "topid":"R"},
-{"from":4, "frompid":"OUT", "to":13, "topid":"R"},
-{"from":11, "frompid":"M", "to":12, "topid":"L"},
-{"from":12, "frompid":"M", "to":13, "topid":"L"},
-{"from":13, "frompid":"M", "to":21},
-{"from":21, "frompid":"OUT", "to":31},
-{"from":21, "frompid":"OUT", "to":32},
-{"from":31, "frompid":"OUT", "to":41},
-{"from":32, "frompid":"OUT", "to":42},
-{"from":41, "frompid":"OUT", "to":51, "topid":"L"},
-{"from":42, "frompid":"OUT", "to":51, "topid":"R"},
-{"from":51, "frompid":"OUT", "to":61},
-{"from":61, "frompid":"OUT", "to":71}
   ]}
     </textarea>
     </div>

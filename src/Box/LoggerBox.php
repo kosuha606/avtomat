@@ -13,6 +13,8 @@ use Avtomat\Utils\StrUtil;
 
 class LoggerBox extends Box implements BoxContract
 {
+    public $title = 'Logger';
+
     public function run()
     {
         $data = $this->nextArgument();

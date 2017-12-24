@@ -2,7 +2,12 @@
 
 namespace Avtomat\Factory;
 
-use Avtomat\Box\Box;
+use Avtomat\Box\ConstBox;
+use Avtomat\Box\ConstComparatorBox;
+use Avtomat\Box\EndBox;
+use Avtomat\Box\IfBox;
+use Avtomat\Box\LoggerBox;
+use Avtomat\Box\StartBox;
 use Avtomat\Contracts\BoxFactoryInterface;
 use Avtomat\Exception\NotFoundBlackBoxException;
 
@@ -25,7 +30,40 @@ class BlackBoxFactory implements BoxFactoryInterface
     /**
      * @var array
      */
+    private $boxes = [];
+
+    /**
+     * @var array
+     */
     private $relations = [];
+
+    public function __construct()
+    {
+        $this->boxes = [
+            'Const' => new ConstBox(),
+            'ConstComparator' => new ConstComparatorBox(),
+            'End' => new EndBox(),
+            'If' => new IfBox(),
+            'Logger' => new LoggerBox(),
+            'Start' => new StartBox(),
+        ];
+    }
+
+    /**
+     * @param $newBoxes
+     */
+    public function addBoxes($newBoxes)
+    {
+        $this->boxes = array_merge($this->boxes, $newBoxes);
+    }
+
+    /**
+     * @return array
+     */
+    public function getBoxes()
+    {
+        return $this->boxes;
+    }
 
     /**
      * @param $data
@@ -72,13 +110,12 @@ class BlackBoxFactory implements BoxFactoryInterface
         $split = explode('::', $objectName);
         $boxName = $split[0];
         $boxId = $split[1];
-        $namespace = 'Avtomat\\Box\\';
-        $objectClass = $namespace.$boxName.'Box';
-        if (class_exists($objectClass)) {
-            $object = new $objectClass($boxId, $arguments);
-            if ($object instanceof Box) {
-                return $object;
-            }
+
+        if (isset($this->boxes[$boxName])) {
+            $object = clone $this->boxes[$boxName];
+            $object->setId($boxId);
+            $object->setArguments($arguments);
+            return $object;
         }
 
         throw new NotFoundBlackBoxException(sprintf('Попытка создвать BlackBox c не известным именем %s', $objectClass));

@@ -11,6 +11,8 @@ use Avtomat\Utils\StrUtil;
  */
 class ConstBox extends Box implements BoxContract
 {
+    public $title = 'Constant';
+
     public function run()
     {
         $constant = $this->nextArgument();

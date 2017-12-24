@@ -4,6 +4,7 @@ namespace Avtomat\Api;
 
 use Avtomat\Box\AlgorithmBox;
 use Avtomat\Contracts\ApiContract;
+use Avtomat\DependencyInjection\DI;
 
 /**
  * Интерфейс для выполнения работы с
@@ -19,9 +20,15 @@ class Avtomat implements ApiContract
      */
     public static function getAvailableObjects()
     {
-        return [
-            'all objects'
-        ];
+        return DI::get('factory')->getBoxes();
+    }
+
+    /**
+     * @param array $boxes
+     */
+    public static function addBoxes($boxes = [])
+    {
+        DI::get('factory')->addBoxes($boxes);
     }
 
     /**

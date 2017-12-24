@@ -11,6 +11,8 @@ use Avtomat\Utils\StrUtil;
  */
 class IfBox extends Box implements BoxContract
 {
+    public $title = 'If';
+
     public function run()
     {
         StrUtil::debug('Блок условия');

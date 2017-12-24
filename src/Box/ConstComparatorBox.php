@@ -11,6 +11,8 @@ use Avtomat\Utils\StrUtil;
  */
 class ConstComparatorBox extends Box implements BoxContract
 {
+    public $title = 'Constant comparator';
+
     public function run()
     {
         $constant = $this->nextArgument();

@@ -13,6 +13,11 @@ use Avtomat\Utils\StrUtil;
 class Box implements BoxContract
 {
     /**
+     * @var string
+     */
+    public $title = 'box';
+
+    /**
      * @var int
      */
     protected $id;
@@ -32,11 +37,15 @@ class Box implements BoxContract
      * @param $id
      * @param $arguments
      */
-    public function __construct($id, $arguments)
+    public function __construct($arguments=null)
     {
-        $this->id = $id;
         $this->arguments = $arguments;
         StrUtil::debug('Аргументы ('.$this->getName().'): '.json_encode($arguments));
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -96,6 +105,22 @@ class Box implements BoxContract
     function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @param $arguments
+     */
+    public function setArguments($arguments)
+    {
+        $this->arguments = $arguments;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getArguments()
+    {
+        return $this->arguments;
     }
 
     /**

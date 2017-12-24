@@ -12,6 +12,8 @@ use Avtomat\Utils\StrUtil;
  */
 class StartBox extends Box implements BoxContract
 {
+    public $title = 'Start';
+
     /**
      * @param $inputData
      */
