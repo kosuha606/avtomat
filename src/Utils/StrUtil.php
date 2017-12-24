@@ -3,6 +3,7 @@
 namespace Avtomat\Utils;
 
 use Avtomat\Contracts\UtilContract;
+use Avtomat\DependencyInjection\DI;
 
 /**
  * Набор помошников для работы со сроками
@@ -16,5 +17,16 @@ class StrUtil implements UtilContract
     public static function writeln($message)
     {
         echo $message."\n";
+    }
+
+    /**
+     * @param $message
+     */
+    public static function debug($message)
+    {
+        $isDebug = DI::get('parameters_bag')->get('debug_mode');
+        if ($isDebug) {
+            echo $message."\n";
+        }
     }
 }

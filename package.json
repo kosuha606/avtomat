@@ -1,0 +1,25 @@
+{
+  "name": "avtomat",
+  "version": "0.0.0",
+  "description": "AVTOMAT ---",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kosuhin/avtomat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kosuhin/avtomat/issues"
+  },
+  "dependencies": {
+    "gojs": "https://github.com/NorthwoodsSoftware/GoJS.git"
+  },
+  "homepage": "https://github.com/kosuhin/avtomat#readme"
+}

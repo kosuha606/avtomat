@@ -13,12 +13,12 @@ class IfBox extends Box implements BoxContract
 {
     public function run()
     {
-        StrUtil::writeln('Блок условия');
+        StrUtil::debug('Блок условия');
         $comparator = $this->getController()->call($this, 'comparator');
         $self = $this;
         $result = $self->getResultsStorage()->read($comparator);
-        StrUtil::writeln('Результат вычислений равен = '.($result ? 'РАВНЫ' : 'НЕРАВНЫ'));
-        $this->getController()->go($this, 'output', function($output) use ($self, $comparator, $result) {
+        $gotoLabel = $result ? 'then' : 'else';
+        $this->getController()->go($this, $gotoLabel, function($output) use ($self, $comparator, $result) {
             $self->getInputsStorage()->write(
                 $output,
                 $result

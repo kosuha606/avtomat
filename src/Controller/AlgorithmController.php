@@ -18,7 +18,7 @@ class AlgorithmController
      */
     public function go($box, $label, $callBack = null)
     {
-        StrUtil::writeln('--->Go to '.$box->getName().'--->');
+        StrUtil::debug('--->Go to '.$box->getName().'--->');
         $factory = DI::get('factory');
         $object = $factory->getObjectByRelation($box->getName().'_'.$label);
         if ($callBack && is_callable($callBack)) {
@@ -34,7 +34,7 @@ class AlgorithmController
      */
     public function call($box, $label)
     {
-        StrUtil::writeln('<---Call by '.$box->getName().'<---');
+        StrUtil::debug('<---Call by '.$box->getName().'<---');
         $factory = DI::get('factory');
         $object = $factory->getObjectByRelation($box->getName().'_'.$label);
         $object->run();

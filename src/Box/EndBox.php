@@ -13,6 +13,6 @@ class EndBox extends Box implements BoxContract
 {
     public function run()
     {
-        StrUtil::writeln('Блок конца алгоритма');
+        StrUtil::debug('Блок конца алгоритма');
     }
 }

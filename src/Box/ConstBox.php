@@ -14,7 +14,7 @@ class ConstBox extends Box implements BoxContract
     public function run()
     {
         $constant = $this->nextArgument();
-        StrUtil::writeln('Блок получения костанты '.$constant);
+        StrUtil::debug('Блок получения костанты '.$constant);
         $this->getResultsStorage()->write($this, $constant);
     }
 }

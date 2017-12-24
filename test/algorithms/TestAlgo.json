@@ -2,8 +2,10 @@
   "objects": [
     {"name": "Start::1", "arguments": []},
     {"name": "Const::1", "arguments": ["constant1"]},
-    {"name": "ConstComparator::1", "arguments": ["constant1"]},
+    {"name": "ConstComparator::1", "arguments": ["constant12"]},
     {"name": "If::1", "arguments": []},
+    {"name": "Logger::1", "arguments": ["Переменные не равны, выполняем ELSE"]},
+    {"name": "Logger::2", "arguments": ["Переменные равны, выполняем THEN"]},
     {"name": "End::1", "arguments": []}
   ],
   "relations": {
@@ -11,6 +13,9 @@
     "Start::1_output": "If::1_input",
     "If::1_comparator": "ConstComparator::1_input",
     "ConstComparator::1_data": "Const::1_output",
-    "If::1_output": "End::1_inut"
+    "If::1_then": "Logger::2_input",
+    "If::1_else": "Logger::1_input",
+    "Logger::1_output": "End::1_input",
+    "Logger::2_output": "End::1_input"
   }
 }

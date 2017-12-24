@@ -66,8 +66,8 @@ class AlgorithmBox extends Box implements AlgorithmContract
      */
     public function run()
     {
-        StrUtil::writeln(sprintf('Run algorithm %s', $this->name));
-        StrUtil::writeln('==============================');
+        StrUtil::debug(sprintf('Run algorithm %s', $this->name));
+        StrUtil::debug('==============================');
 
         $inputData = $this->inputData;
         $self = $this;

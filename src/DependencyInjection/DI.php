@@ -15,7 +15,8 @@ class DI
         'controller' => 'Avtomat\\Controller\\AlgorithmController',
         'factory' => 'Avtomat\\Factory\\BlackBoxFactory',
         'results_storage' => 'Avtomat\\Storage\\BoxResultsStorage',
-        'inputs_storage' => 'Avtomat\\Storage\\BoxInputsStorage'
+        'inputs_storage' => 'Avtomat\\Storage\\BoxInputsStorage',
+        'parameters_bag' => 'Avtomat\\Bag\\ParametersBag',
     ];
 
     /**

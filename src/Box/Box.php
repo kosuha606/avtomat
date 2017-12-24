@@ -36,7 +36,7 @@ class Box implements BoxContract
     {
         $this->id = $id;
         $this->arguments = $arguments;
-        StrUtil::writeln('Аргументы ('.$this->getName().'): '.json_encode($arguments));
+        StrUtil::debug('Аргументы ('.$this->getName().'): '.json_encode($arguments));
     }
 
     /**
@@ -44,7 +44,7 @@ class Box implements BoxContract
      */
     function run()
     {
-        StrUtil::writeln(sprintf('Run is not implemented in class %s! Check this class!', get_class($this)));
+        StrUtil::debug(sprintf('Run is not implemented in class %s! Check this class!', get_class($this)));
     }
 
     /**
