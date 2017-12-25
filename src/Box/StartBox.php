@@ -12,6 +12,8 @@ use Avtomat\Util\StrUtil;
  */
 class StartBox extends Box implements BoxContract
 {
+    public $isEditable = false;
+
     /**
      * @param $inputData
      */

@@ -4,6 +4,12 @@ namespace Avtomat\Adapter;
 
 class GoJSAdapter
 {
+    /**
+     * Адаптация внутреннего алгоритма ядра
+     * к формату алгоритма GOJS
+     * @param $data
+     * @return mixed
+     */
     public function adapt($data)
     {
         $data['class'] = 'go.GraphLinksModel';
@@ -14,10 +20,11 @@ class GoJSAdapter
         $nodeDataArray = [];
         foreach ($data['objects'] as $object) {
             $split = explode('::', $object['name']);
+            $type = $split[0];
             $nodeDataArray[] = [
-                'type' => $split[0],
+                'type' => $type,
                 'key' => $object['name'],
-                'name' => $split[0]
+                'name' => $type === 'Comment' ? $object['comment'] : $object['name']
             ];
         }
 
@@ -45,9 +52,16 @@ class GoJSAdapter
         $data['linkDataArray'] = $linkDataArray;
         unset($data['relations']);
 
-//        echo '<pre>';
-//        var_dump($data);
-//        echo '</pre>';
         return $data;
+    }
+
+    /**
+     * Восстановление алгоритма ядра
+     * из алгоритма GOJS
+     * @param $data
+     */
+    public function restore($data)
+    {
+
     }
 }

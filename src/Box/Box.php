@@ -12,7 +12,11 @@ use Avtomat\Util\StrUtil;
  */
 class Box implements BoxContract
 {
-    public $inputLabels = ['input'];
+    public $color = '#5166a0';
+
+    public $isEditable = true;
+
+    public $inputLabels = ['input', 'comment'];
 
     public $outputLabels = ['output'];
 

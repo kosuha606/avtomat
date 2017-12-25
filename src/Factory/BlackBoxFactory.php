@@ -2,6 +2,7 @@
 
 namespace Avtomat\Factory;
 
+use Avtomat\Box\CommentBox;
 use Avtomat\Box\ConstBox;
 use Avtomat\Box\ConstComparatorBox;
 use Avtomat\Box\EndBox;
@@ -46,6 +47,7 @@ class BlackBoxFactory implements BoxFactoryInterface
             'If' => new IfBox(),
             'Logger' => new LoggerBox(),
             'Start' => new StartBox(),
+            'Comment' => new CommentBox(),
         ];
     }
 

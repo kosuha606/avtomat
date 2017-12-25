@@ -131,7 +131,7 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
             <?php
                 foreach ($objects as $object) {
                     ?>
-            makeTemplate("<?= $object->getTitle() ?>", "", "lightgray",
+            makeTemplate("<?= $object->getTitle() ?>", "", "<?= $object->color ?>",
                 [
                     <?php
                     $points = '';
@@ -179,6 +179,39 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
         function load() {
             myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
         }
+
+        function add(object) {
+            console.log(object);
+            var nextId = getNextId();
+            console.log(nextId);
+            var data = go.Model.fromJson(document.getElementById("mySavedModel").value);
+            data.nodeDataArray.push({
+                type: object,
+                key: object+'::'+nextId,
+                name: object+'::'+nextId
+            });
+//            console.log(data.nodeDataArray);
+            myDiagram.model = data;
+            save();
+            load();
+        }
+
+        function getNextId() {
+            var maxId = 0;
+            var id;
+            var property;
+            for (var i in myDiagram.model.nodeDataArray) {
+                if (myDiagram.model.nodeDataArray.hasOwnProperty(i)) {
+                    property = myDiagram.model.nodeDataArray[i];
+                    id = property['key'].replace(property['type']+'::', '');
+                    if (id > maxId) {
+                        maxId = id;
+                    }
+                }
+            }
+
+            return maxId*1+1;
+        }
     </script>
 </head>
 <body onload="init()">
@@ -186,12 +219,14 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
     <table width="100%">
         <tr>
             <td width="25%" valign="top">
-                <h1>Классы:</h1>
+                <h1>Блоки:</h1>
                 <table>
                 <?php
 
                 foreach ($objects as $object) {
-                    echo '<tr><td>'.$object->getTitle().'</td><td><button>Добавить +</button></td></tr>';
+                    if ($object->isEditable) {
+                        echo '<tr><td>' . $object->getTitle() . '</td><td><button onclick="add(\'' . $object->getTitle() . '\')">Добавить +</button></td></tr>';
+                    }
                 }
                 ?>
                 </table>

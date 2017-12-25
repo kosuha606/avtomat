@@ -11,6 +11,8 @@ use Avtomat\Util\StrUtil;
  */
 class EndBox extends Box implements BoxContract
 {
+    public $isEditable = false;
+
     public function run()
     {
         StrUtil::debug('Блок конца алгоритма');
