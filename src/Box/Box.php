@@ -2,10 +2,10 @@
 
 namespace Avtomat\Box;
 
-use Avtomat\Contracts\BoxContract;
-use Avtomat\Contracts\StorageContract;
+use Avtomat\Contract\BoxContract;
+use Avtomat\Contract\StorageContract;
 use Avtomat\DependencyInjection\DI;
-use Avtomat\Utils\StrUtil;
+use Avtomat\Util\StrUtil;
 
 /**
  * Базовый класс для всех черных ящиков

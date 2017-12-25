@@ -8,7 +8,7 @@ use Avtomat\Box\EndBox;
 use Avtomat\Box\IfBox;
 use Avtomat\Box\LoggerBox;
 use Avtomat\Box\StartBox;
-use Avtomat\Contracts\BoxFactoryInterface;
+use Avtomat\Contract\BoxFactoryInterface;
 use Avtomat\Exception\NotFoundBlackBoxException;
 
 /**

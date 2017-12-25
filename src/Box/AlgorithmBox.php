@@ -2,13 +2,13 @@
 
 namespace Avtomat\Box;
 
-use Avtomat\Contracts\AlgorithmContract;
-use Avtomat\Contracts\BoxFactoryInterface;
+use Avtomat\Contract\AlgorithmContract;
+use Avtomat\Contract\BoxFactoryInterface;
 use Avtomat\DependencyInjection\DI;
 use Avtomat\Exception\AlgoBadConfigException;
 use Avtomat\Exception\AlgoFileNotFoundException;
 use Avtomat\Exception\NoAlgoNameException;
-use Avtomat\Utils\StrUtil;
+use Avtomat\Util\StrUtil;
 
 /**
  * Алгоритм - основная точка выхода

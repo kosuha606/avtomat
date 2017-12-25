@@ -3,7 +3,7 @@
 namespace Avtomat\Api;
 
 use Avtomat\Box\AlgorithmBox;
-use Avtomat\Contracts\ApiContract;
+use Avtomat\Contract\ApiContract;
 use Avtomat\DependencyInjection\DI;
 
 /**

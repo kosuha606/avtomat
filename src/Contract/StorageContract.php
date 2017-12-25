@@ -1,6 +1,6 @@
 <?php
 
-namespace Avtomat\Contracts;
+namespace Avtomat\Contract;
 
 use Avtomat\Box\Box;
 

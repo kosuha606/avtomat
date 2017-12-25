@@ -169,12 +169,14 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
         <tr>
             <td width="20%" valign="top">
                 <h1>Классы:</h1>
+                <table>
                 <?php
 
                 foreach ($objects as $object) {
-                    echo '<li>'.$object->getTitle().'</li>';
+                    echo '<tr><td>'.$object->getTitle().'</td><td><button>Добавить</button></td></tr>';
                 }
                 ?>
+                </table>
             </td>
             <td>
                 <div id="myDiagramDiv" style="border: solid 1px black; width: 100%; height: 600px"></div>

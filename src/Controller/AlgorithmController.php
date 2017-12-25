@@ -3,7 +3,7 @@
 namespace Avtomat\Controller;
 
 use Avtomat\DependencyInjection\DI;
-use Avtomat\Utils\StrUtil;
+use Avtomat\Util\StrUtil;
 
 /**
  * Class AlgorithmController

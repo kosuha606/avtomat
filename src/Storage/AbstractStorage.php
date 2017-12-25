@@ -3,7 +3,7 @@
 namespace Avtomat\Storage;
 
 use Avtomat\Box\Box;
-use Avtomat\Contracts\StorageContract;
+use Avtomat\Contract\StorageContract;
 
 abstract class AbstractStorage implements StorageContract
 {

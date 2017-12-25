@@ -1,10 +1,10 @@
 <?php
 
-namespace Avtomat\Contracts;
+namespace Avtomat\Contract;
 
 /**
  * Interface UtilContract
- * @package Avtomat\Contracts
+ * @package Avtomat\Contract
  */
 interface UtilContract
 {

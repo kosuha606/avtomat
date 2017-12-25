@@ -1,13 +1,13 @@
 <?php
 
-namespace Avtomat\Utils;
+namespace Avtomat\Util;
 
-use Avtomat\Contracts\UtilContract;
+use Avtomat\Contract\UtilContract;
 use Avtomat\DependencyInjection\DI;
 
 /**
  * Набор помошников для работы со сроками
- * @package Avtomat\Utils
+ * @package Avtomat\Util
  */
 class StrUtil implements UtilContract
 {

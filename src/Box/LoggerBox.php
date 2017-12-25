@@ -8,8 +8,8 @@
 
 namespace Avtomat\Box;
 
-use Avtomat\Contracts\BoxContract;
-use Avtomat\Utils\StrUtil;
+use Avtomat\Contract\BoxContract;
+use Avtomat\Util\StrUtil;
 
 class LoggerBox extends Box implements BoxContract
 {

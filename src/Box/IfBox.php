@@ -2,9 +2,9 @@
 
 namespace Avtomat\Box;
 
-use Avtomat\Contracts\BoxContract;
+use Avtomat\Contract\BoxContract;
 use Avtomat\DependencyInjection\DI;
-use Avtomat\Utils\StrUtil;
+use Avtomat\Util\StrUtil;
 
 /**
  * Условие
