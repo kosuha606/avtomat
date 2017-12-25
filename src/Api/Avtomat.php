@@ -52,4 +52,13 @@ class Avtomat implements ApiContract
         $algorithm->setInputData($inputData);
         $algorithm->run();
     }
+
+    public static function adaptAlgoToGoJS($algoFile)
+    {
+        $json = file_get_contents($algoFile);
+        $adapter = DI::get('json_adapter');
+        $adaptedJson = $adapter->adapt(json_decode($json, true));
+
+        return json_encode($adaptedJson);
+    }
 }

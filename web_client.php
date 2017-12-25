@@ -131,9 +131,27 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
             <?php
                 foreach ($objects as $object) {
                     ?>
-            makeTemplate("<?= $object->getTitle() ?>", "", "forestgreen",
-                [makePort("input", true), makePort("data", true), makePort("comparator", true)],
-                [makePort("then", true), makePort("else", true)]);
+            makeTemplate("<?= $object->getTitle() ?>", "", "lightgray",
+                [
+                    <?php
+                    $points = '';
+                    foreach ($object->inputLabels as $label) {
+                        $points .= 'makePort("' . $label . '", true),';
+                    }
+                    $points = rtrim($points, ',');
+                    ?>
+                    <?= $points ?>
+                ],
+                [
+                    <?php
+                    $points = '';
+                    foreach ($object->outputLabels as $label) {
+                        $points .= 'makePort("' . $label . '", false),';
+                    }
+                    $points = rtrim($points, ',');
+                    ?>
+                    <?= $points ?>
+                ]);
                     <?php
                 }
             ?>
@@ -167,13 +185,13 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
 <div id="sample">
     <table width="100%">
         <tr>
-            <td width="20%" valign="top">
+            <td width="25%" valign="top">
                 <h1>Классы:</h1>
                 <table>
                 <?php
 
                 foreach ($objects as $object) {
-                    echo '<tr><td>'.$object->getTitle().'</td><td><button>Добавить</button></td></tr>';
+                    echo '<tr><td>'.$object->getTitle().'</td><td><button>Добавить +</button></td></tr>';
                 }
                 ?>
                 </table>
@@ -189,17 +207,16 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
             <button id="SaveButton" onclick="save()">Сохранить</button>
             <button onclick="load()">Загрузить</button>
         </div>
+
+        <?php
+
+        $algorithmJson = \Avtomat\Api\Avtomat::adaptAlgoToGoJS('test/algorithms/TestAlgo.json');
+//        echo $algorithmJson;
+
+        ?>
+
         <textarea id="mySavedModel" style="width:100%;height:300px">
-{ "class": "go.GraphLinksModel",
-  "nodeCategoryProperty": "type",
-  "linkFromPortIdProperty": "frompid",
-  "linkToPortIdProperty": "topid",
-  "nodeDataArray": [
-{"key":5, "type":"If", "name":"if"},
-{"key":6, "type":"If", "name":"if"}
-  ],
-  "linkDataArray": [
-  ]}
+<?= $algorithmJson ?>
     </textarea>
     </div>
 </div>
