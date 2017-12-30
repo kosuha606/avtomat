@@ -19,7 +19,8 @@
     "url": "https://github.com/kosuhin/avtomat/issues"
   },
   "dependencies": {
-    "gojs": "https://github.com/NorthwoodsSoftware/GoJS.git"
+    "gojs": "https://github.com/NorthwoodsSoftware/GoJS.git",
+    "jquery": "*"
   },
   "homepage": "https://github.com/kosuhin/avtomat#readme"
 }

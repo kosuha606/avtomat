@@ -24,7 +24,8 @@ class GoJSAdapter
             $nodeDataArray[] = [
                 'type' => $type,
                 'key' => $object['name'],
-                'name' => $type === 'Comment' ? $object['comment'] : $object['name']
+                'name' => $type === 'Comment' ? $object['comment'] : $object['name'],
+                'arguments' => $object['arguments']
             ];
         }
 

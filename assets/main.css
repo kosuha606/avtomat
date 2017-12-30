@@ -1,0 +1,76 @@
+body {
+    background: #ccc;
+    font-size: 12px;
+    font-family: arial;
+}
+
+#myDiagramDiv {
+    background: #979797;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+textarea {
+    border: solid 1px #000;
+    margin-top: 10px;
+    display: block;
+    background: #979797;
+    color: #000;
+}
+
+hr {
+    border: none;
+    background: #000;
+    height: 1px;
+}
+
+input,button {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    background: #5166a0;
+    color: #fff;
+}
+
+button[disabled] {
+    background: #3E2CA0;
+    color: #ccc;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+table {
+    width: 100%;
+}
+table td {
+    border-bottom: solid 1px #999;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.blocks_arguments_wrapper {
+    height: 260px;
+    background: #f1f1f1;
+    padding: 5px;
+    border-radius: 5px;
+    overflow-y: scroll;
+}
+
+#blocks_arguments input, button {
+    margin-top: 5px;
+}
+#blocks_arguments button {
+    margin-right: 5px;
+}
+
+#blocks_arguments input {
+    width: 90%;
+}

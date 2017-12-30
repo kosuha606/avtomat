@@ -2,6 +2,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+$algoName = 'TestAlgo';
+define('ALGO_ROOT', 'test/algorithms/');
 
 require 'vendor/autoload.php';
 
@@ -16,8 +18,11 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
     <!-- Copyright 1998-2017 by Northwoods Software Corporation. -->
     <meta charset="UTF-8">
     <script src="../node_modules/gojs/release/go.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/main.css">
     <!--<script src="../node_modules/gojs/assets/js/goSamples.js"></script>  &lt;!&ndash; this is only for the GoJS Samples framework &ndash;&gt;-->
     <script id="code">
+
         function init() {
             if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
             var $ = go.GraphObject.make;
@@ -169,6 +174,7 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
                 );
 
             load();
+
         }
 
         // Show the diagram's model in JSON format that the user may edit
@@ -178,6 +184,26 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
         }
         function load() {
             myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+            updateArgumentsBlock();
+        }
+
+        function updateArgumentsBlock() {
+            var data = myDiagram.model;
+            var html = '';
+            var item;
+            for (var i in data.nodeDataArray) {
+                if (data.nodeDataArray.hasOwnProperty(i)) {
+                    item = data.nodeDataArray[i];
+                    html += '<tr><td><div>'+item['name']+'</div>';
+                    for (var i = 0; i < item['arguments'].length; i++) {
+                        html += '<div>';
+                        html += '<input type="text" value="'+item['arguments'][i]+'" />';
+                        html += '</div>';
+                    }
+                    html += '<button>Добавить +</button><button>Сохранить</button></td></tr>'
+                }
+            }
+            $('#blocks_arguments').html(html);
         }
 
         function add(object) {
@@ -219,19 +245,37 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
     <table width="100%">
         <tr>
             <td width="25%" valign="top">
-                <h1>Блоки:</h1>
-                <table>
-                <?php
+                <div>
+                    <h2>Название алгоритма</h2>
+                    <form action="" method="post">
+                        <div>
+                            <input type="text" name="algorithm_name" value="<?= $algoName ?>" />
+                            <button>Загрузить</button>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+                <div class="blocks_arguments_wrapper">
+                    <h2>доступные блоки</h2>
+                    <table>
+                    <?php
 
-                foreach ($objects as $object) {
-                    if ($object->isEditable) {
-                        echo '<tr><td>' . $object->getTitle() . '</td><td><button onclick="add(\'' . $object->getTitle() . '\')">Добавить +</button></td></tr>';
+                    foreach ($objects as $object) {
+                        if ($object->isEditable) {
+                            echo '<tr><td>' . $object->getTitle() . '</td><td><button onclick="add(\'' . $object->getTitle() . '\')">Добавить +</button></td></tr>';
+                        }
                     }
-                }
-                ?>
-                </table>
+                    ?>
+                    </table>
+                </div>
+                <hr>
+                <div class="blocks_arguments_wrapper">
+                    <h2>Аргументы блоков</h2>
+                    <table id="blocks_arguments"></table>
+                </div>
             </td>
             <td>
+                <h2>Схема алгоритма</h2>
                 <div id="myDiagramDiv" style="border: solid 1px black; width: 100%; height: 600px"></div>
             </td>
         </tr>
@@ -245,11 +289,11 @@ $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
 
         <?php
 
-        $algorithmJson = \Avtomat\Api\Avtomat::adaptAlgoToGoJS('test/algorithms/TestAlgo.json');
+        $algorithmJson = \Avtomat\Api\Avtomat::adaptAlgoToGoJS(ALGO_ROOT.$algoName.'.json');
 //        echo $algorithmJson;
 
         ?>
-
+        <h2>JSON дамп алгоритма</h2>
         <textarea id="mySavedModel" style="width:100%;height:300px">
 <?= $algorithmJson ?>
     </textarea>
