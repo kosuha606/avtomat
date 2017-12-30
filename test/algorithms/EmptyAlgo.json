@@ -1,0 +1,15 @@
+{
+  "objects": [
+    {
+      "name": "Start::1",
+      "arguments": []
+    },
+    {
+      "name": "End::1",
+      "arguments": []
+    }
+  ],
+  "relations": {
+    "Start::1_output": "End::1_input"
+  }
+}
