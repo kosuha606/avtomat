@@ -1,4 +1,4 @@
 vendor
 nbproject
 .idea
-node_modules
+web_client/node_modules

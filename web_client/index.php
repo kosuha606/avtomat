@@ -3,9 +3,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $algoName = 'TestAlgo';
-define('ALGO_ROOT', 'test/algorithms/');
+define('ALGO_ROOT', '../test/algorithms/');
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 if ($_GET) {
     if (isset($_GET['algorithm_name'])) {

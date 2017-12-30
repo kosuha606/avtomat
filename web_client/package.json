@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "gojs": "https://github.com/NorthwoodsSoftware/GoJS.git",
-    "jquery": "*"
+    "jquery": "*",
+    "vue": "^2.5.13"
   },
   "homepage": "https://github.com/kosuhin/avtomat#readme"
 }
