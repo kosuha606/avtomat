@@ -36,7 +36,7 @@ $(function () {
         methods: {
             findByClass: function (className) {
                 return _.find(myDiagramLink.model.nodeDataArray, function (arr) {
-                    return arr['name'] === className;
+                    return arr['key'] === className;
                 });
             },
             add: function (className) {
@@ -57,6 +57,7 @@ $(function () {
                 var obj = this.findByClass(className);
                 obj.arguments[index] = val;
                 save();
+                load();
                 this.$forceUpdate();
             },
             remove: function (event) {

@@ -75,7 +75,7 @@ try {
                 function makeTemplate(typename, icon, background, inports, outports) {
                     var node = $(go.Node, "Spot",
                         $(go.Panel, "Auto",
-                            {width: 100, height: 120},
+                            {width: 120, height: 120},
                             $(go.Shape, "Rectangle",
                                 {
                                     fill: background, stroke: null, strokeWidth: 0,
@@ -239,17 +239,17 @@ try {
                                     <tr v-for="argument in diagram.model.nodeDataArray">
                                         <td>
                                             <strong>
-                                                {{ argument.name }}
+                                                {{ argument.key }}
                                             </strong>
                                             <div v-for="(in_arg, index) in argument.arguments">
                                                 <div>
                                                     <input class="index" type="hidden" v-model="index">
-                                                    <input class="class_name" type="hidden" v-model="argument.name">
+                                                    <input class="class_name" type="hidden" v-model="argument.key">
                                                     <input type="text" v-model="in_arg" @change="change">
                                                     <button @click="remove">-</button>
                                                 </div>
                                             </div>
-                                            <button @click="add(argument.name)">+</button>
+                                            <button @click="add(argument.key)">+</button>
                                         </td>
                                     </tr>
                                 </table>

@@ -51,5 +51,15 @@ function save() {
  * Загрузка алгоритма
  */
 function load() {
-    myDiagramLink.model =  go.Model.fromJson(document.getElementById("mySavedModel").value);
+    var data = go.Model.fromJson(document.getElementById("mySavedModel").value);
+    var max = data.nodeDataArray.length;
+
+    for (var i = 0; i < max; i++) {
+        if (data.nodeDataArray[i] && data.nodeDataArray[i]['type'] === 'Comment') {
+            if (data.nodeDataArray[i]['arguments'].length > 0) {
+                data.nodeDataArray[i]['name'] = data.nodeDataArray[i]['arguments'][0];
+            }
+        }
+    }
+    myDiagramLink.model =  data;
 }
