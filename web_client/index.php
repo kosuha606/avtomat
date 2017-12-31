@@ -13,6 +13,14 @@ if ($_GET) {
     }
 }
 
+if ($_POST) {
+    if (isset($_POST['algorithm_json'])) {
+        $algorithmJsonForSave = $_POST['algorithm_json'];
+        var_dump($algorithmJsonForSave);
+        exit(1);
+    }
+}
+
 $objects = \Avtomat\Api\Avtomat::getAvailableObjects();
 
 try {
@@ -238,7 +246,7 @@ try {
                                                     <input class="index" type="hidden" v-model="index">
                                                     <input class="class_name" type="hidden" v-model="argument.name">
                                                     <input type="text" v-model="in_arg" @change="change">
-                                                    <button @click="remove()">-</button>
+                                                    <button @click="remove">-</button>
                                                 </div>
                                             </div>
                                             <button @click="add(argument.name)">+</button>
@@ -267,8 +275,23 @@ try {
                 //        echo $algorithmJson;
 
                 ?>
-                <h2>JSON дамп алгоритма</h2>
-                <textarea id="mySavedModel" style="width:100%;height:300px"><?= $algorithmJson ?></textarea>
+                <table>
+                    <tr>
+                        <td width="50%" valign="top">
+                            <form action="" method="post">
+                                <button class="green">Сохранить алгоритм</button>
+                                <h2>JSON дамп алгоритма</h2>
+                                <textarea id="mySavedModel" name="algorithm_json" style="width:100%;height:300px"><?= $algorithmJson ?></textarea>
+                            </form>
+                        </td>
+                        <td width="50%" valign="top">
+                            <div style="margin-left: 20px">
+                                <h2>Запуск и отладка алгоритма</h2>
+                                <button>Запуск</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
         <script>

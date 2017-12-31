@@ -59,8 +59,14 @@ $(function () {
                 save();
                 this.$forceUpdate();
             },
-            remove: function () {
-                alert('remove');
+            remove: function (event) {
+                var self = $(event.target);
+                var className = self.parent().find('.class_name').val();
+                var index = self.parent().find('.index').val();
+                var obj = this.findByClass(className);
+                obj.arguments.splice(index, 1);
+                console.log('removing');
+                save();
             }
         }
     });
