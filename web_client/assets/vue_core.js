@@ -9,7 +9,9 @@ $(function () {
     argumentsVue = new Vue({
         el: "#arguments",
         data: {
-            test: ['1']
+            test: ['1'],
+            diagramData: myDiagramLink.model.nodeDataArray,
+            diagram: myDiagramLink
         },
         computed: {
             arguments: function () {

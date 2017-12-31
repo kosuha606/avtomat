@@ -52,7 +52,7 @@ try {
                     );
 
                 myDiagramLink = myDiagram;
-
+//
                 myDiagram.addDiagramListener("Modified", function (e) {
                     var button = document.getElementById("SaveButton");
                     if (button) button.disabled = !myDiagram.isModified;
@@ -228,20 +228,20 @@ try {
                             <!--                        {{ arguments|json }}-->
                             <div class="blocks_arguments_wrapper">
                                 <table>
-                                    <tr v-for="argument in arguments" v-model="arguments">
+                                    <tr v-for="argument in diagram.model.nodeDataArray">
                                         <td>
                                             <strong>
-                                                {{ argument.class }}
+                                                {{ argument.name }}
                                             </strong>
                                             <div v-for="(in_arg, index) in argument.arguments">
                                                 <div>
                                                     <input class="index" type="hidden" v-model="index">
-                                                    <input class="class_name" type="hidden" v-model="argument.class">
+                                                    <input class="class_name" type="hidden" v-model="argument.name">
                                                     <input type="text" v-model="in_arg" @change="change">
                                                     <button @click="remove()">-</button>
                                                 </div>
                                             </div>
-                                            <button @click="add(argument.class)">+</button>
+                                            <button @click="add(argument.name)">+</button>
                                         </td>
                                     </tr>
                                 </table>

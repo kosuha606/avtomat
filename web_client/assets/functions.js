@@ -33,7 +33,7 @@ function add(object) {
         name: object + '::' + nextId,
         arguments: []
     });
-    myDiagram.model = data;
+    myDiagramLink.model = data;
     save();
     load();
     argumentsVue.$forceUpdate();
@@ -44,12 +44,12 @@ function add(object) {
  */
 function save() {
     document.getElementById("mySavedModel").value = myDiagram.model.toJson();
-    myDiagram.isModified = false;
+    myDiagramLink.isModified = false;
 }
 
 /**
  * Загрузка алгоритма
  */
 function load() {
-    myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+    myDiagramLink.model =  go.Model.fromJson(document.getElementById("mySavedModel").value);
 }
