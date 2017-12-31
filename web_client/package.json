@@ -21,7 +21,8 @@
   "dependencies": {
     "gojs": "https://github.com/NorthwoodsSoftware/GoJS.git",
     "jquery": "*",
-    "vue": "^2.5.13"
+    "vue": "^2.5.13",
+    "underscore": "^1.8.3"
   },
   "homepage": "https://github.com/kosuhin/avtomat#readme"
 }
