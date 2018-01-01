@@ -24,7 +24,7 @@ class GoJSAdapter
             $nodeDataArray[] = [
                 'type' => $type,
                 'key' => $object['name'],
-                'name' => $type === 'Comment' ? $object['comment'] : $object['name'],
+                'name' => $object['name'],
                 'arguments' => $object['arguments']
             ];
         }
@@ -63,6 +63,23 @@ class GoJSAdapter
      */
     public function restore($data)
     {
+        $result = ['objects'=> [], 'relations'=> []];
 
+        foreach ($data['nodeDataArray'] as $object) {
+            $result['objects'][] = [
+                'name' => $object['key'],
+                'arguments' => $object['arguments']
+            ];
+        }
+
+        foreach ($data['linkDataArray'] as $relation) {
+            $result['relations'][$relation['from'].'_'.$relation['frompid']] = $relation['to'].'_'.$relation['topid'];
+        }
+//
+//        echo '<pre>';
+//        print_r($result);
+//        echo '</pre>';
+
+        return $result;
     }
 }

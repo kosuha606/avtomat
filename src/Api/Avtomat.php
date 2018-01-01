@@ -61,4 +61,13 @@ class Avtomat implements ApiContract
 
         return json_encode($adaptedJson);
     }
+
+    public static function saveAlgoFromGOJS($algoGOJS, $algoPath)
+    {
+        $adapter = DI::get('json_adapter');
+        $adaptedJson = $adapter->restore(json_decode($algoGOJS, true));
+
+        file_put_contents($algoPath.'.json', json_encode($adaptedJson));
+//        die('hello');
+    }
 }

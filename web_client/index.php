@@ -1,8 +1,13 @@
 <?php
+
+use Avtomat\Api\Avtomat;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $algoName = 'TestAlgo';
+$runResult = 'none';
+$inputJson = '[]';
 define('ALGO_ROOT', '../test/algorithms/');
 
 require '../vendor/autoload.php';
@@ -11,13 +16,23 @@ if ($_GET) {
     if (isset($_GET['algorithm_name'])) {
         $algoName = $_GET['algorithm_name'];
     }
-}
 
-if ($_POST) {
-    if (isset($_POST['algorithm_json'])) {
-        $algorithmJsonForSave = $_POST['algorithm_json'];
-        var_dump($algorithmJsonForSave);
-        exit(1);
+    if (isset($_GET['action'])) {
+        $action = $_GET['action'];
+
+        if ($_POST && $action === 'run') {
+            $inputJson = $_POST['input_json'];
+
+            ob_start();
+            Avtomat::run(ALGO_ROOT.$algoName, json_decode($inputJson));
+            $runResult = ob_get_clean();
+        }
+
+        if ($_POST && $action === 'save') {
+            Avtomat::saveAlgoFromGOJS($_POST['algorithm_json'], ALGO_ROOT.$algoName);
+            header('location:/');
+        }
+
     }
 }
 
@@ -125,18 +140,17 @@ try {
                         {
                             fill: "gray", stroke: null,
                             desiredSize: new go.Size(8, 8),
-                            portId: name,  // declare this object to be a "port"
-                            toMaxLinks: 1,  // don't allow more than one link into a port
-                            cursor: "pointer"  // show a different cursor to indicate potential link point
+                            portId: name,
+                            toMaxLinks: 99,
+                            cursor: "pointer"
                         });
 
-                    var lab = $(go.TextBlock, name,  // the name of the port
+                    var lab = $(go.TextBlock, name,
                         {font: "7pt sans-serif"});
 
                     var panel = $(go.Panel, "Horizontal",
                         {margin: new go.Margin(2, 0)});
 
-                    // set up the port/panel based on which side of the node it will be on
                     if (leftside) {
                         port.toSpot = go.Spot.Left;
                         port.toLinkable = true;
@@ -187,7 +201,7 @@ try {
                     $(go.Link,
                         {
                             routing: go.Link.Orthogonal, corner: 5,
-                            relinkableFrom: true, relinkableTo: true
+                            relinkableFrom: false, relinkableTo: false
                         },
                         $(go.Shape, {stroke: "gray", strokeWidth: 2}),
                         $(go.Shape, {stroke: "gray", fill: "gray", toArrow: "Standard"})
@@ -265,7 +279,7 @@ try {
 
             <div>
                 <div>
-                    <button id="SaveButton" onclick="save()">Сохранить</button>
+                    <button id="SaveButton" onclick="save()">Сохранить дамп</button>
                     <button onclick="load()">Загрузить</button>
                 </div>
 
@@ -278,7 +292,7 @@ try {
                 <table>
                     <tr>
                         <td width="50%" valign="top">
-                            <form action="" method="post">
+                            <form action="?action=save" method="post">
                                 <button class="green">Сохранить алгоритм</button>
                                 <h2>JSON дамп алгоритма</h2>
                                 <textarea id="mySavedModel" name="algorithm_json" style="width:100%;height:300px"><?= $algorithmJson ?></textarea>
@@ -286,8 +300,16 @@ try {
                         </td>
                         <td width="50%" valign="top">
                             <div style="margin-left: 20px">
-                                <h2>Запуск и отладка алгоритма</h2>
-                                <button>Запуск</button>
+                                <form action="?action=run" method="post">
+                                    <h2>Запуск и отладка алгоритма</h2>
+                                    <button>Запуск</button>
+                                    <h2>Входные данные (JSON)</h2>
+                                    <textarea name="input_json" style="width: 100%; height: 100px"><?= $inputJson ?></textarea>
+                                    <h2>Результат выполнения</h2>
+                                    <div id="run_result">
+                                        <?= nl2br($runResult) ?>
+                                    </div>
+                                </form>
                             </div>
                         </td>
                     </tr>

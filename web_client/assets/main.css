@@ -78,3 +78,10 @@ table td {
 .green {
     background: green;
 }
+
+#run_result {
+    background: #000;
+    height: 100px;
+    color: #fff;
+    padding: 8px;
+}
