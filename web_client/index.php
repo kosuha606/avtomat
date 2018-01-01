@@ -201,7 +201,7 @@ try {
                     $(go.Link,
                         {
                             routing: go.Link.Orthogonal, corner: 5,
-                            relinkableFrom: false, relinkableTo: false
+                            relinkableFrom: true, relinkableTo: true
                         },
                         $(go.Shape, {stroke: "gray", strokeWidth: 2}),
                         $(go.Shape, {stroke: "gray", fill: "gray", toArrow: "Standard"})
