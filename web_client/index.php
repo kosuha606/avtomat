@@ -76,7 +76,6 @@ try {
                     );
 
                 myDiagramLink = myDiagram;
-//
                 myDiagram.addDiagramListener("Modified", function (e) {
                     var button = document.getElementById("SaveButton");
                     if (button) button.disabled = !myDiagram.isModified;
@@ -155,6 +154,7 @@ try {
                     if (leftside) {
                         port.toSpot = go.Spot.Left;
                         port.toLinkable = true;
+                        port.fromLinkable = true;
                         lab.margin = new go.Margin(1, 0, 0, 1);
                         panel.alignment = go.Spot.TopLeft;
                         panel.add(port);
@@ -162,6 +162,7 @@ try {
                     } else {
                         port.fromSpot = go.Spot.Right;
                         port.fromLinkable = true;
+                        port.toLinkable = true;
                         lab.margin = new go.Margin(1, 1, 0, 0);
                         panel.alignment = go.Spot.TopRight;
                         panel.add(lab);
@@ -201,12 +202,30 @@ try {
                 myDiagram.linkTemplate =
                     $(go.Link,
                         {
-                            routing: go.Link.Orthogonal, corner: 5,
+                            routing: go.Link.AvoidsNodes, corner: 5,
                             relinkableFrom: true, relinkableTo: true
                         },
                         $(go.Shape, {stroke: "gray", strokeWidth: 2}),
                         $(go.Shape, {stroke: "gray", fill: "gray", toArrow: "Standard"})
                     );
+
+//                myDiagram.linkTemplate =
+//                    $(CustomLink,  // defined below
+//                        {
+//                            routing: go.Link.AvoidsNodes,
+//                            corner: 4,
+//                            curve: go.Link.JumpGap,
+//                            reshapable: true,
+//                            resegmentable: true,
+//                            relinkableFrom: true,
+//                            relinkableTo: true
+//                        },
+//                        new go.Binding("points").makeTwoWay(),
+//                        $(go.Shape, { stroke: "#2F4F4F", strokeWidth: 2 })
+//                    );
+//                function CustomLink() {
+//                    go.Link.call(this);
+//                };
 
                 load();
                 save();

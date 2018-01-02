@@ -7,9 +7,9 @@ use Avtomat\Util\StrUtil;
 
 class VarBox extends Box
 {
-    public $outputLabels = ['data'];
+    public $outputLabels = [];
 
-    public $inputLabels = ['input', 'result'];
+    public $inputLabels = ['input', 'result', 'data'];
 
     public function run()
     {

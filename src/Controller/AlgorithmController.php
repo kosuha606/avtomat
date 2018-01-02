@@ -37,10 +37,6 @@ class AlgorithmController
         StrUtil::debug('<---Call by '.$box->getName().'<---');
         $factory = DI::get('factory');
         $object = $factory->getObjectByRelation($box->getName().'_'.$label);
-        if (!$object) {
-            var_dump($label);
-            var_dump($box);
-        }
         $object->run();
 
         return $object;
@@ -51,6 +47,9 @@ class AlgorithmController
         StrUtil::debug('<---Get relation '.$box->getName().'<---');
         $factory = DI::get('factory');
         $object = $factory->getObjectByRelation($box->getName().'_'.$label);
+        if (!$object) {
+            $object = $factory->getObjectByRelationReverse($box->getName().'_'.$label);
+        }
 
         return $object;
     }

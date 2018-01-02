@@ -27,6 +27,10 @@ abstract class AbstractStorage implements StorageContract
      */
     public function read(Box $box)
     {
-        return $this->storage[$box->getName()];
+        if (isset($this->storage[$box->getName()])) {
+            return $this->storage[$box->getName()];
+        } else {
+            return null;
+        }
     }
 }

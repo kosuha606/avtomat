@@ -95,6 +95,19 @@ class BlackBoxFactory implements BoxFactoryInterface
     }
 
     /**
+     * @param $relation
+     * @return mixed
+     */
+    public function getObjectByRelationReverse($relation)
+    {
+        $reverseRelations = array_flip($this->relations);
+        if (isset($reverseRelations[$relation])) {
+            $split = explode('_', $reverseRelations[$relation]);
+            return $this->objects[$split[0]];
+        }
+    }
+
+    /**
      * @return array
      */
     public function getObjects()
