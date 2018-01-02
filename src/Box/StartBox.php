@@ -14,6 +14,8 @@ class StartBox extends Box implements BoxContract
 {
     public $isEditable = false;
 
+    public $outputLabels = ['output', 'input-data'];
+
     /**
      * @param $inputData
      */

@@ -9,6 +9,7 @@ use Avtomat\Box\EndBox;
 use Avtomat\Box\IfBox;
 use Avtomat\Box\LoggerBox;
 use Avtomat\Box\StartBox;
+use Avtomat\Box\VarBox;
 use Avtomat\Contract\BoxFactoryInterface;
 use Avtomat\Exception\NotFoundBlackBoxException;
 
@@ -48,6 +49,7 @@ class BlackBoxFactory implements BoxFactoryInterface
             'Logger' => new LoggerBox(),
             'Start' => new StartBox(),
             'Comment' => new CommentBox(),
+            'Var' => new VarBox(),
         ];
     }
 

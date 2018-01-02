@@ -24,7 +24,8 @@ if ($_GET) {
             $inputJson = $_POST['input_json'];
 
             ob_start();
-            Avtomat::run(ALGO_ROOT.$algoName, json_decode($inputJson));
+            $result = Avtomat::run(ALGO_ROOT.$algoName, json_decode($inputJson));
+            echo 'Результат выполнения: '.json_encode($result);
             $runResult = ob_get_clean();
         }
 

@@ -50,7 +50,7 @@ class Avtomat implements ApiContract
     {
         $algorithm = new AlgorithmBox($algorithmName);
         $algorithm->setInputData($inputData);
-        $algorithm->run();
+        return $algorithm->run();
     }
 
     public static function adaptAlgoToGoJS($algoFile)

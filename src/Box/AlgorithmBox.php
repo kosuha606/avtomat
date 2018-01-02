@@ -73,12 +73,16 @@ class AlgorithmBox extends Box implements AlgorithmContract
         $inputData = $this->inputData;
         $self = $this;
         $startBox = $this->findStart();
+        $this->getResultsStorage()->write($startBox, $inputData);
         $this->getController()->go($startBox, 'input', function($output) use ($self, $inputData) {
             $self->getInputsStorage()->write(
                 $output,
                 $inputData
             );
         });
+        $endBox = $this->findEnd();
+
+        return $this->getResultsStorage()->read($endBox);
     }
 
     /**
@@ -104,5 +108,19 @@ class AlgorithmBox extends Box implements AlgorithmContract
         }
 
         return $startBox;
+    }
+
+    private function findEnd()
+    {
+        $allObjects = $this->getFactory()->getObjects();
+        $endBox = null;
+        foreach ($allObjects as $object) {
+            if ($object instanceof EndBox) {
+                $endBox = $object;
+                break;
+            }
+        }
+
+        return $endBox;
     }
 }
