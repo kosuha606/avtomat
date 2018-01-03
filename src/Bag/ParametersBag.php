@@ -7,7 +7,7 @@ use Avtomat\Exception\LogicException;
 class ParametersBag
 {
     private $parameters = [
-        'debug_mode' => true
+        'debug_mode' => false
     ];
 
     /**

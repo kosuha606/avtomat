@@ -11,6 +11,8 @@ use Avtomat\Util\StrUtil;
  */
 class AlgorithmController
 {
+    private $inputData = [];
+
     /**
      * Передать управление по метке
      * @param $box
@@ -52,5 +54,21 @@ class AlgorithmController
         }
 
         return $object;
+    }
+
+    /**
+     * @return array
+     */
+    public function getInputData()
+    {
+        return $this->inputData;
+    }
+
+    /**
+     * @param array $inputData
+     */
+    public function setInputData($inputData)
+    {
+        $this->inputData = $inputData;
     }
 }

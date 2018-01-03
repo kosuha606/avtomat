@@ -4,6 +4,7 @@ namespace Avtomat\Box;
 
 use Avtomat\Contract\BoxContract;
 use Avtomat\Contract\StorageContract;
+use Avtomat\Controller\AlgorithmController;
 use Avtomat\DependencyInjection\DI;
 use Avtomat\Util\StrUtil;
 
@@ -153,7 +154,7 @@ class Box implements BoxContract
     }
 
     /**
-     * @return mixed|null
+     * @return AlgorithmController
      */
     public function getController()
     {

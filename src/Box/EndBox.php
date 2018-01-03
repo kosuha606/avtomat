@@ -21,10 +21,8 @@ class EndBox extends Box implements BoxContract
     {
         $data = null;
         StrUtil::debug('Блок конца алгоритма');
-        $result = $this->getController()->getRelation($this, 'result');
-        if ($result) {
-            $data = $this->getResultsStorage()->read($result);
-        }
+        $data = $this->getController()->getInputData();
+        $this->getResultsStorage()->write($this, $data);
 
         return $data;
     }
