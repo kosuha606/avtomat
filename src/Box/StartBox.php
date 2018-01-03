@@ -23,6 +23,7 @@ class StartBox extends Box implements BoxContract
     {
         StrUtil::debug('Вызван блок начала');
         $inputData = $this->getResultsStorage()->read($this);
+//        var_dump($inputData);
         $this->getController()->setInputData($inputData);
         $this->getResultsStorage()->write($this, 'start data');
         $this->getController()->go($this, 'output');

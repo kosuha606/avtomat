@@ -31,7 +31,7 @@ if ($_GET) {
 
         if ($_POST && $action === 'save') {
             Avtomat::saveAlgoFromGOJS($_POST['algorithm_json'], ALGO_ROOT.$algoName);
-            header('location:/');
+            header('location:/?algorithm_name='.$algoName);
         }
 
     }
@@ -209,24 +209,6 @@ try {
                         $(go.Shape, {stroke: "gray", fill: "gray", toArrow: "Standard"})
                     );
 
-//                myDiagram.linkTemplate =
-//                    $(CustomLink,  // defined below
-//                        {
-//                            routing: go.Link.AvoidsNodes,
-//                            corner: 4,
-//                            curve: go.Link.JumpGap,
-//                            reshapable: true,
-//                            resegmentable: true,
-//                            relinkableFrom: true,
-//                            relinkableTo: true
-//                        },
-//                        new go.Binding("points").makeTwoWay(),
-//                        $(go.Shape, { stroke: "#2F4F4F", strokeWidth: 2 })
-//                    );
-//                function CustomLink() {
-//                    go.Link.call(this);
-//                };
-
                 load();
                 save();
             }
@@ -312,7 +294,7 @@ try {
                 <table>
                     <tr>
                         <td width="50%" valign="top">
-                            <form action="?action=save" method="post">
+                            <form action="?action=save&algorithm_name=<?= $algoName ?>" method="post">
                                 <button class="green">Сохранить алгоритм</button>
                                 <h2>JSON дамп алгоритма</h2>
                                 <textarea id="mySavedModel" name="algorithm_json" style="width:100%;height:300px"><?= $algorithmJson ?></textarea>
@@ -320,7 +302,7 @@ try {
                         </td>
                         <td width="50%" valign="top">
                             <div style="margin-left: 20px">
-                                <form action="?action=run" method="post">
+                                <form action="?action=run&algorithm_name=<?= $algoName ?>" method="post">
                                     <h2>Запуск и отладка алгоритма</h2>
                                     <button>Запуск</button>
                                     <h2>Входные данные (JSON)</h2>

@@ -7,6 +7,7 @@ use Avtomat\Box\ConstBox;
 use Avtomat\Box\ConstComparatorBox;
 use Avtomat\Box\EndBox;
 use Avtomat\Box\IfBox;
+use Avtomat\Box\IncrementResultBox;
 use Avtomat\Box\LoggerBox;
 use Avtomat\Box\StartBox;
 use Avtomat\Box\VarBox;
@@ -49,6 +50,7 @@ class BlackBoxFactory implements BoxFactoryInterface
             'Logger' => new LoggerBox(),
             'Start' => new StartBox(),
             'Comment' => new CommentBox(),
+            'IncrementResult' => new IncrementResultBox(),
             'Var' => new VarBox(),
         ];
     }
