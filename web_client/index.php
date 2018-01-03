@@ -236,15 +236,23 @@ try {
                         <hr>
                         <h2>доступные блоки</h2>
                         <div class="blocks_arguments_wrapper">
-                            <table>
+                            <ul class="available_boxes">
                                 <?php
+                                $groupedObjects = [];
                                 foreach ($objects as $object) {
-                                    if ($object->isEditable) {
-                                        echo '<tr><td>' . $object->getTitle() . '</td><td><button onclick="add(\'' . $object->getTitle() . '\')">+</button></td></tr>';
+                                    $groupedObjects[$object->group][] = $object;
+                                }
+
+                                foreach ($groupedObjects as $key => $group) {
+                                    echo '<li class="block">'.$key.'</li>';
+                                    foreach ($group as $object) {
+                                        if ($object->isEditable) {
+                                            echo '<li><span>' . $object->getTitle() . '</span><button onclick="add(\'' . $object->getTitle() . '\')">+</button></li>';
+                                        }
                                     }
                                 }
                                 ?>
-                            </table>
+                            </ul>
                         </div>
                         <hr>
                         <div id="arguments">

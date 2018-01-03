@@ -13,6 +13,8 @@ use Avtomat\Util\StrUtil;
  */
 class Box implements BoxContract
 {
+    public $group = 'None';
+
     public $color = '#5166a0';
 
     public $isEditable = true;

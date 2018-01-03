@@ -12,6 +12,8 @@ use Avtomat\Util\StrUtil;
  */
 class StartBox extends Box implements BoxContract
 {
+    public $group = 'Simple';
+
     public $isEditable = false;
 
     public $outputLabels = ['output', 'input-data'];

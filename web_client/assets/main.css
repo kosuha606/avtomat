@@ -86,3 +86,31 @@ table td {
     overflow-y: scroll;
     padding: 8px;
 }
+
+.available_boxes {
+    padding: 0;
+    margin: 0;
+}
+
+.available_boxes li {
+    display: inline-block;
+    padding: 5px;
+    border: solid 1px #ccc;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.available_boxes span {
+    margin-right: 10px;
+}
+
+.available_boxes .block {
+    display: block;
+    text-transform: uppercase;
+    border: none;
+    letter-spacing:0.8px;
+    font-weight: bold;
+}

@@ -11,6 +11,8 @@ namespace Avtomat\Box;
 
 class IncrementResultBox extends Box
 {
+    public $group = 'Modifier';
+
     public function run()
     {
         $data = $this->getController()->getInputData();

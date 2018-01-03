@@ -7,6 +7,8 @@ use Avtomat\Util\StrUtil;
 
 class VarBox extends Box
 {
+    public $group = 'Simple';
+
     public $outputLabels = [];
 
     public $inputLabels = ['input', 'result', 'data'];

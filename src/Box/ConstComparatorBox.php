@@ -11,6 +11,8 @@ use Avtomat\Util\StrUtil;
  */
 class ConstComparatorBox extends Box implements BoxContract
 {
+    public $group = 'Simple';
+
     public function run()
     {
         $constant = $this->nextArgument();

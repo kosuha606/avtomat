@@ -11,6 +11,8 @@ use Avtomat\Util\StrUtil;
  */
 class EndBox extends Box implements BoxContract
 {
+    public $group = 'Simple';
+
     public $isEditable = false;
 
     public $outputLabels = ['output', 'result'];
