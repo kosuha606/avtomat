@@ -14,8 +14,6 @@ if (!isset($assetsDir)) {
     $assetsDir = '';
 }
 
-require '../vendor/autoload.php';
-
 if ($_GET) {
     if (isset($_GET['algorithm_name'])) {
         $algoName = $_GET['algorithm_name'];
