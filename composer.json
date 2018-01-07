@@ -1,5 +1,5 @@
 {
-    "name": "root/black-box",
+    "name": "kosuhin/avtomat",
     "require": {
         "nikic/php-parser": "^3.1"
     },
