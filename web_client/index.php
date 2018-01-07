@@ -10,6 +10,10 @@ $runResult = 'none';
 $inputJson = '[]';
 define('ALGO_ROOT', '../test/algorithms/');
 
+if (!isset($assetsDir)) {
+    $assetsDir = '';
+}
+
 require '../vendor/autoload.php';
 
 if ($_GET) {
@@ -48,14 +52,13 @@ try {
         <title>Avtomat redactor</title>
         <meta name="description"
               content="Directed acyclic graph of nodes with varying input and output ports with labels, oriented horizontally."/>
-        <!-- Copyright 1998-2017 by Northwoods Software Corporation. -->
         <meta charset="UTF-8">
-        <script src="node_modules/gojs/release/go.js"></script>
-        <script src="node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="node_modules/underscore/underscore-min.js"></script>
-        <script src="node_modules/vue/dist/vue.min.js"></script>
-        <link rel="stylesheet" href="assets/main.css">
-        <script src="assets/functions.js"></script>
+        <script src="<?= $assetsDir ?>assets/lib/go.js"></script>
+        <script src="<?= $assetsDir ?>assets/lib/jquery.min.js"></script>
+        <script src="<?= $assetsDir ?>assets/lib/underscore-min.js"></script>
+        <script src="<?= $assetsDir ?>assets/lib/vue.min.js"></script>
+        <link rel="stylesheet" href="<?= $assetsDir ?>assets/main.css">
+        <script src="<?= $assetsDir ?>assets/functions.js"></script>
         <script id="code">
             var myDiagramLink;
             var argumentsVue;
@@ -305,7 +308,7 @@ try {
                             <form action="?action=save&algorithm_name=<?= $algoName ?>" method="post">
                                 <button class="green">Сохранить алгоритм</button>
                                 <h2>JSON дамп алгоритма</h2>
-                                <textarea id="mySavedModel" name="algorithm_json" style="width:100%;height:300px"><?= $algorithmJson ?></textarea>
+                                <textarea id="mySavedModel" name="algorithm_json" style="width:100%;height:700px"><?= $algorithmJson ?></textarea>
                             </form>
                         </td>
                         <td width="50%" valign="top">
