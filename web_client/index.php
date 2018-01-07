@@ -344,7 +344,7 @@ try {
             });
         </script>
     </div>
-    <script src="/assets/vue_core.js"></script>
+    <script src="<?= $assetsDir ?>assets/vue_core.js"></script>
     </body>
     </html>
     <?php
