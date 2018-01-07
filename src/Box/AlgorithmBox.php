@@ -47,7 +47,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
         }
         $this->name = $algoName;
 
-        $algorithmPath = $algoName.'.json';
+        $algorithmPath = $algoName;
 //        var_dump($algorithmPath);
         if (!is_file($algorithmPath)) {
             throw new AlgoFileNotFoundException('Файл алгоритма не найден!');
