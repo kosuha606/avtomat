@@ -305,12 +305,14 @@ try {
                         <td width="50%" valign="top">
                             <form action="?action=save&algorithm_name=<?= $algoName ?>" method="post">
                                 <button class="green">Сохранить алгоритм</button>
+                                <div style="display: none;">
                                 <h2>JSON дамп алгоритма</h2>
                                 <textarea id="mySavedModel" name="algorithm_json" style="width:100%;height:700px"><?= $algorithmJson ?></textarea>
+                                </div>
                             </form>
                         </td>
                         <td width="50%" valign="top">
-                            <div style="margin-left: 20px">
+                            <div style="margin-left: 20px; display: none;">
                                 <form action="?action=run&algorithm_name=<?= $algoName ?>" method="post">
                                     <h2>Запуск и отладка алгоритма</h2>
                                     <button>Запуск</button>
