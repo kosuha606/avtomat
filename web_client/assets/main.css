@@ -114,3 +114,9 @@ table td {
     letter-spacing:0.8px;
     font-weight: bold;
 }
+
+.colorbox {
+    width: 50px;
+    height: 10px;
+    display: inline-block;
+}

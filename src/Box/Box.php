@@ -4,6 +4,7 @@ namespace Avtomat\Box;
 
 use Avtomat\Contract\BoxContract;
 use Avtomat\Contract\StorageContract;
+use Avtomat\Contract\WriterContract;
 use Avtomat\Controller\AlgorithmController;
 use Avtomat\DependencyInjection\DI;
 use Avtomat\Util\StrUtil;
@@ -185,5 +186,13 @@ class Box implements BoxContract
     public function getFactory()
     {
         return $this->get('factory');
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this instanceof WriterContract ? 'darkred' : $this->color;
     }
 }

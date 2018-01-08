@@ -11,8 +11,6 @@ use Avtomat\Util\StrUtil;
  */
 class AlgorithmController
 {
-    private $inputData = [];
-
     /**
      * Передать управление по метке
      * @param $box
@@ -61,14 +59,14 @@ class AlgorithmController
      */
     public function getInputData()
     {
-        return $this->inputData;
+        return DI::get('input_stream')->read();
     }
 
     /**
      * @param array $inputData
      */
-    public function setInputData($inputData)
+    public function setInputData($writer, $inputData)
     {
-        $this->inputData = $inputData;
+        DI::get('input_stream')->write($writer, $inputData);
     }
 }

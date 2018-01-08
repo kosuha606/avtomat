@@ -9,19 +9,21 @@
 namespace Avtomat\Box;
 
 
-class IncrementResultBox extends Box
+use Avtomat\Contract\WriterContract;
+
+class IncrementResultBox extends Box implements WriterContract
 {
     public $group = 'Modifier';
 
     public function run()
     {
         $data = $this->getController()->getInputData();
-//        var_dump($data);
+
         foreach ($data as &$datum) {
             $datum++;
         }
-//        var_dump($data);
-        $this->getController()->setInputData($data);
+
+        $this->getController()->setInputData($this, $data);
         $this->getController()->go($this, 'output');
     }
 }

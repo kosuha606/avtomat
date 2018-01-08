@@ -18,6 +18,7 @@ class DI
         'inputs_storage' => 'Avtomat\\Storage\\BoxInputsStorage',
         'parameters_bag' => 'Avtomat\\Bag\\ParametersBag',
         'json_adapter' => 'Avtomat\\Adapter\\GoJSAdapter',
+        'input_stream' => 'Avtomat\\Stream\\InputStream',
     ];
 
     /**

@@ -175,7 +175,7 @@ try {
                 <?php
                 foreach ($objects as $object) {
                 ?>
-                makeTemplate("<?= $object->getTitle() ?>", "", "<?= $object->color ?>",
+                makeTemplate("<?= $object->getTitle() ?>", "", "<?= $object->getColor() ?>",
                     [
                         <?php
                         $points = '';
@@ -283,6 +283,21 @@ try {
                     </td>
                     <td valign="top">
                         <h2>Схема алгоритма</h2>
+                        <div>
+                            <div>
+                                <span class="colorbox" style="background: #5166a0;"></span>
+                                - Логический блок
+                            </div>
+                            <div>
+                                <span class="colorbox" style="background: #8b0000;"></span>
+                                - Логический блок изменяющий поток данных
+                            </div>
+                            <div>
+                                <span class="colorbox" style="background: #dac062;"></span>
+                                - Блок комментария
+                            </div>
+                            <br>
+                        </div>
                         <div id="myDiagramDiv" style="border: solid 1px black; width: 100%; height: 670px"></div>
                     </td>
                 </tr>
