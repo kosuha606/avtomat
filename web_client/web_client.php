@@ -36,7 +36,7 @@ if ($_GET) {
 
             if ($_POST && $action === 'save') {
                 Avtomat::saveAlgoFromGOJS($_POST['algorithm_json'], $algoName);
-                header('location:/?algorithm_name=' . $algoName);
+                header("Refresh:0");
             }
         }
 
