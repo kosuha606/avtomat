@@ -14,6 +14,8 @@ if (!isset($assetsDir)) {
     $assetsDir = '';
 }
 
+$editEnable = (isset($editEnable) and $editEnable);
+
 if ($_GET) {
     if (isset($_GET['algorithm_name'])) {
         $algoName = $_GET['algorithm_name'];
@@ -22,18 +24,20 @@ if ($_GET) {
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
 
-        if ($_POST && $action === 'run') {
-            $inputJson = $_POST['input_json'];
+        if ($editEnable) {
+            if ($_POST && $action === 'run') {
+                $inputJson = $_POST['input_json'];
 
-            ob_start();
-            $result = Avtomat::run($algoName, json_decode($inputJson));
-            echo 'Результат выполнения: '.json_encode($result);
-            $runResult = ob_get_clean();
-        }
+                ob_start();
+                $result = Avtomat::run($algoName, json_decode($inputJson));
+                echo 'Результат выполнения: ' . json_encode($result);
+                $runResult = ob_get_clean();
+            }
 
-        if ($_POST && $action === 'save') {
-            Avtomat::saveAlgoFromGOJS($_POST['algorithm_json'], $algoName);
-            header('location:/?algorithm_name='.$algoName);
+            if ($_POST && $action === 'save') {
+                Avtomat::saveAlgoFromGOJS($_POST['algorithm_json'], $algoName);
+                header('location:/?algorithm_name=' . $algoName);
+            }
         }
 
     }
@@ -225,6 +229,7 @@ try {
             <table width="100%">
                 <tr>
                     <td width="25%" valign="top">
+                        <?php if ($editEnable) : ?>
                         <div>
                             <h2>Название алгоритма</h2>
                             <form action="" method="get">
@@ -234,6 +239,7 @@ try {
                                 </div>
                             </form>
                         </div>
+                        <?php endif; ?>
                         <hr>
                         <h2>доступные блоки</h2>
                         <div class="blocks_arguments_wrapper">
@@ -304,10 +310,12 @@ try {
             </table>
 
             <div>
+                <?php if ($editEnable) : ?>
                 <div>
                     <button id="SaveButton" onclick="save()">Сохранить дамп</button>
                     <button onclick="load()">Загрузить</button>
                 </div>
+                <?php endif ?>
 
                 <?php
 
@@ -318,6 +326,7 @@ try {
                 <table>
                     <tr>
                         <td width="50%" valign="top">
+                            <?php if ($editEnable) : ?>
                             <form action="?action=save&algorithm_name=<?= $algoName ?>" method="post">
                                 <button class="green">Сохранить алгоритм</button>
                                 <div style="display: none;">
@@ -325,6 +334,7 @@ try {
                                 <textarea id="mySavedModel" name="algorithm_json" style="width:100%;height:700px"><?= $algorithmJson ?></textarea>
                                 </div>
                             </form>
+                            <?php endif; ?>
                         </td>
                         <td width="50%" valign="top">
                             <div style="margin-left: 20px; display: none;">
