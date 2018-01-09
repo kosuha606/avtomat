@@ -326,15 +326,15 @@ try {
                 <table>
                     <tr>
                         <td width="50%" valign="top">
-                            <?php if ($editEnable) : ?>
                             <form action="?action=save&algorithm_name=<?= $algoName ?>" method="post">
+                                <?php if ($editEnable) : ?>
                                 <button class="green">Сохранить алгоритм</button>
+                                <?php endif; ?>
                                 <div style="display: none;">
                                 <h2>JSON дамп алгоритма</h2>
                                 <textarea id="mySavedModel" name="algorithm_json" style="width:100%;height:700px"><?= $algorithmJson ?></textarea>
                                 </div>
                             </form>
-                            <?php endif; ?>
                         </td>
                         <td width="50%" valign="top">
                             <div style="margin-left: 20px; display: none;">
