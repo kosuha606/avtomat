@@ -67,6 +67,9 @@ class AlgorithmBox extends Box implements AlgorithmContract
         StrUtil::debug('==============================');
 
         $inputData = $this->inputData;
+        if (!$inputData) {
+            $inputData = $this->getController()->getInputData();
+        }
         $self = $this;
         $startBox = $this->findStart();
         $this->getResultsStorage()->write($startBox, $inputData);
@@ -78,7 +81,11 @@ class AlgorithmBox extends Box implements AlgorithmContract
         });
         $endBox = $this->findEnd();
 
-        return $this->getResultsStorage()->read($endBox);
+        if ($this->getController()->getRelation($this, 'output')) {
+            $this->getController()->go($this, 'output');
+        } else {
+            return $this->getResultsStorage()->read($endBox);
+        }
     }
 
     /**
