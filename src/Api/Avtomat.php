@@ -38,6 +38,7 @@ class Avtomat implements ApiContract
     public static function run($algorithmName, $inputData)
     {
         $algorithm = new AlgorithmBox();
+        $algorithm->setId('starter');
         $algorithm->setName($algorithmName);
         $algorithm->setInputData($inputData);
 

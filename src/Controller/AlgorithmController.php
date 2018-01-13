@@ -20,7 +20,8 @@ class AlgorithmController
     {
         StrUtil::debug('--->Go to '.$box->getName().'--->');
         $factory = DI::get('factory');
-        $object = $factory->getObjectByRelation($box->getName().'_'.$label);
+        $object = $factory->getObjectByRelation($box->getName().'_'.$label, $box->getAlgorithm());
+//        var_dump($object);
         if ($callBack && is_callable($callBack)) {
             $callBack($object);
         }
@@ -36,7 +37,7 @@ class AlgorithmController
     {
         StrUtil::debug('<---Call by '.$box->getName().'<---');
         $factory = DI::get('factory');
-        $object = $factory->getObjectByRelation($box->getName().'_'.$label);
+        $object = $factory->getObjectByRelation($box->getName().'_'.$label, $box->getAlgorithm());
         $object->run();
 
         return $object;
@@ -46,9 +47,9 @@ class AlgorithmController
     {
         StrUtil::debug('<---Get relation '.$box->getName().'<---');
         $factory = DI::get('factory');
-        $object = $factory->getObjectByRelation($box->getName().'_'.$label);
+        $object = $factory->getObjectByRelation($box->getName().'_'.$label, $box->getAlgorithm());
         if (!$object) {
-            $object = $factory->getObjectByRelationReverse($box->getName().'_'.$label);
+            $object = $factory->getObjectByRelationReverse($box->getName().'_'.$label, $box->getAlgorithm());
         }
 
         return $object;

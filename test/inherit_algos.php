@@ -6,4 +6,5 @@ use Avtomat\Utils\StrUtil;
 use Avtomat\Api\Avtomat;
 
 Avtomat::setAlgoDir(__DIR__.'/algorithms/');
-Avtomat::run('EmptyAlgo.json', []);
+$res = Avtomat::run('EmptyAlgo.json', [1,2,3]);
+var_dump($res);

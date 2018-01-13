@@ -24,6 +24,8 @@ class Box implements BoxContract
 
     public $outputLabels = ['output'];
 
+    public $algorithm = 'none';
+
     /**
      * @var string
      */
@@ -194,5 +196,21 @@ class Box implements BoxContract
     public function getColor()
     {
         return $this instanceof WriterContract ? 'darkred' : $this->color;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAlgorithm()
+    {
+        return $this->algorithm;
+    }
+
+    /**
+     * @param string $algorithm
+     */
+    public function setAlgorithm($algorithm)
+    {
+        $this->algorithm = $algorithm;
     }
 }

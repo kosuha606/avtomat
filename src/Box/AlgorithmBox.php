@@ -54,7 +54,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
             throw new AlgoBadConfigException('Алгоритм не правильно сконфигурирован! отсутствуют ключи objects или relations');
         }
 
-        $this->getFactory()->setAlgorithmData($algorithmData);
+        $this->getFactory()->setAlgorithmData($algorithmData, $this->getName());
     }
 
     /**
@@ -62,6 +62,9 @@ class AlgorithmBox extends Box implements AlgorithmContract
      */
     public function run()
     {
+        if ($this->getAlgorithm() === 'none') {
+            $this->setAlgorithm($this->getName());
+        }
         $this->init();
         StrUtil::debug(sprintf('Run algorithm %s', $this->name));
         StrUtil::debug('==============================');
@@ -104,7 +107,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
      */
     private function findStart()
     {
-        $allObjects = $this->getFactory()->getObjects();
+        $allObjects = $this->getFactory()->getObjects($this->getName());
         $startBox = null;
         foreach ($allObjects as $object) {
             if ($object instanceof StartBox) {
@@ -121,7 +124,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
      */
     private function findEnd()
     {
-        $allObjects = $this->getFactory()->getObjects();
+        $allObjects = $this->getFactory()->getObjects($this->getName());
         $endBox = null;
         foreach ($allObjects as $object) {
             if ($object instanceof EndBox) {

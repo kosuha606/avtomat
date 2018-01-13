@@ -1,1 +1,1 @@
-{"objects":[{"name":"Start::1","arguments":[]},{"name":"End::1","arguments":[]},{"name":"Logger::2","arguments":["Hello World!"]}],"relations":{"Start::1_input":"Start::1_output","Start::1_output":"Logger::2_input","Logger::2_output":"End::1_input"}}
+{"objects":[{"name":"Start::1","arguments":[]},{"name":"End::1","arguments":[]},{"name":"IncrementResult::3","arguments":[]}],"relations":{"Start::1_input":"Start::1_output","Start::1_output":"IncrementResult::3_input","IncrementResult::3_output":"End::1_input"}}

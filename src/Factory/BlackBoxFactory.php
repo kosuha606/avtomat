@@ -41,6 +41,11 @@ class BlackBoxFactory implements BoxFactoryInterface
      */
     private $relations = [];
 
+    /**
+     * @var array
+     */
+    private $algorithmData = [];
+
     public function __construct()
     {
         $this->boxes = [
@@ -76,13 +81,13 @@ class BlackBoxFactory implements BoxFactoryInterface
     /**
      * @param $data
      */
-    public function setAlgorithmData($data)
+    public function setAlgorithmData($data, $algorithm = null)
     {
         $this->data = $data;
-        $this->relations = $data['relations'];
+        $this->relations[$algorithm] = $data['relations'];
 
         foreach ($data['objects'] as $object) {
-            $this->objects[$object['name']] = $this->create($object);
+            $this->objects[$algorithm][$object['name']] = $this->create($object, $algorithm);
         }
     }
 
@@ -90,11 +95,11 @@ class BlackBoxFactory implements BoxFactoryInterface
      * @param $relation
      * @return mixed
      */
-    public function getObjectByRelation($relation)
+    public function getObjectByRelation($relation, $algorithm = null)
     {
-        if (isset($this->relations[$relation])) {
-            $split = explode('_', $this->relations[$relation]);
-            return $this->objects[$split[0]];
+        if (isset($this->relations[$algorithm][$relation])) {
+            $split = explode('_', $this->relations[$algorithm][$relation]);
+            return $this->objects[$algorithm][$split[0]];
         }
     }
 
@@ -102,21 +107,21 @@ class BlackBoxFactory implements BoxFactoryInterface
      * @param $relation
      * @return mixed
      */
-    public function getObjectByRelationReverse($relation)
+    public function getObjectByRelationReverse($relation, $algorithm = null)
     {
-        $reverseRelations = array_flip($this->relations);
+        $reverseRelations = array_flip($this->relations[$algorithm]);
         if (isset($reverseRelations[$relation])) {
             $split = explode('_', $reverseRelations[$relation]);
-            return $this->objects[$split[0]];
+            return $this->objects[$algorithm][$split[0]];
         }
     }
 
     /**
      * @return array
      */
-    public function getObjects()
+    public function getObjects($algorithm)
     {
-        return $this->objects;
+        return $this->objects[$algorithm];
     }
 
     /**
@@ -124,7 +129,7 @@ class BlackBoxFactory implements BoxFactoryInterface
      * @return mixed
      * @throws NotFoundBlackBoxException
      */
-    public function create($object)
+    public function create($object, $algorithm = null)
     {
         $objectName = $object['name'];
         $arguments = $object['arguments'];
@@ -136,6 +141,8 @@ class BlackBoxFactory implements BoxFactoryInterface
             $object = clone $this->boxes[$boxName];
             $object->setId($boxId);
             $object->setArguments($arguments);
+            /** Каждый бокс должен знать в каком он алгоритме */
+            $object->setAlgorithm($algorithm);
             return $object;
         }
 
