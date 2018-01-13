@@ -7,7 +7,8 @@ use Avtomat\Exception\LogicException;
 class ParametersBag
 {
     private $parameters = [
-        'debug_mode' => false
+        'debug_mode' => false,
+        'algoDir' => '/'
     ];
 
     /**
@@ -22,5 +23,14 @@ class ParametersBag
         }
 
         throw new LogicException('Неверная конфигурация параметров!');
+    }
+
+    /**
+     * @param $parameterKey
+     * @param $value
+     */
+    public function set($parameterKey, $value)
+    {
+        $this->parameters[$parameterKey] = $value;
     }
 }

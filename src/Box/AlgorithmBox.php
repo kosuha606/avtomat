@@ -18,6 +18,8 @@ use Avtomat\Util\StrUtil;
  */
 class AlgorithmBox extends Box implements AlgorithmContract
 {
+    public $group = 'Simple';
+
     /**
      * @var string
      */
@@ -33,22 +35,15 @@ class AlgorithmBox extends Box implements AlgorithmContract
      */
     private $inputData;
 
-    /**
-     * AlgorithmBox constructor.
-     * @param $algoName
-     * @throws AlgoBadConfigException
-     * @throws AlgoFileNotFoundException
-     * @throws NoAlgoNameException
-     */
-    public function __construct($algoName)
+    public function init()
     {
+        $algoName = $this->name === 'undefined' ? $this->nextArgument() : $this->name;
         if (!$algoName) {
             throw new NoAlgoNameException('Алгоритм обязательно должен иметь имя!');
         }
-        $this->name = $algoName;
 
-        $algorithmPath = $algoName;
-//        var_dump($algorithmPath);
+        $algorithmDir = DI::get('parameters_bag')->get('algoDir');
+        $algorithmPath = $algorithmDir.$algoName;
         if (!is_file($algorithmPath)) {
             throw new AlgoFileNotFoundException('Файл алгоритма не найден!');
         }
@@ -67,6 +62,7 @@ class AlgorithmBox extends Box implements AlgorithmContract
      */
     public function run()
     {
+        $this->init();
         StrUtil::debug(sprintf('Run algorithm %s', $this->name));
         StrUtil::debug('==============================');
 
@@ -110,6 +106,9 @@ class AlgorithmBox extends Box implements AlgorithmContract
         return $startBox;
     }
 
+    /**
+     * @return EndBox|null
+     */
     private function findEnd()
     {
         $allObjects = $this->getFactory()->getObjects();
@@ -122,5 +121,13 @@ class AlgorithmBox extends Box implements AlgorithmContract
         }
 
         return $endBox;
+    }
+
+    /**
+     * @param $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }

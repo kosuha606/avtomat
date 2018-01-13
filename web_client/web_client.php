@@ -5,7 +5,7 @@ use Avtomat\Api\Avtomat;
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$algoName = '../test/algorithms/TestAlgo.json';
+$algoName = 'TestAlgo.json';
 $runResult = 'none';
 $inputJson = '[]';
 define('ALGO_ROOT', '../test/algorithms/');

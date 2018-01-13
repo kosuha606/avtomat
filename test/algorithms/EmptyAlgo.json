@@ -1,15 +1,1 @@
-{
-  "objects": [
-    {
-      "name": "Start::1",
-      "arguments": []
-    },
-    {
-      "name": "End::1",
-      "arguments": []
-    }
-  ],
-  "relations": {
-    "Start::1_output": "End::1_input"
-  }
-}
+{"objects":[{"name":"Start::1","arguments":[]},{"name":"End::1","arguments":[]},{"name":"Algorithm::2","arguments":["InnerAlgo.json"]},{"name":"Logger::3","arguments":["OuterAlgo Hello!"]}],"relations":{"Start::1_input":"Start::1_output","Start::1_output":"Logger::3_input","Algorithm::2_output":"End::1_input","Logger::3_output":"Algorithm::2_input"}}

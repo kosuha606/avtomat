@@ -2,6 +2,7 @@
 
 namespace Avtomat\Factory;
 
+use Avtomat\Box\AlgorithmBox;
 use Avtomat\Box\CommentBox;
 use Avtomat\Box\ConstBox;
 use Avtomat\Box\ConstComparatorBox;
@@ -43,6 +44,7 @@ class BlackBoxFactory implements BoxFactoryInterface
     public function __construct()
     {
         $this->boxes = [
+            'Algorithm' => new AlgorithmBox(),
             'Const' => new ConstBox(),
             'ConstComparator' => new ConstComparatorBox(),
             'End' => new EndBox(),

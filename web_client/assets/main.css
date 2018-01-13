@@ -2,6 +2,7 @@ body {
     background: #dedede;
     font-size: 12px;
     font-family: arial;
+    margin-top: 100px;
 }
 
 #myDiagramDiv {

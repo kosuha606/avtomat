@@ -32,27 +32,30 @@ class Avtomat implements ApiContract
     }
 
     /**
-     * Изменяет алгоритм
-     *
-     * @param $algoName
-     * @param $config
-     */
-    public function changeAlgorithm($algoName, $config)
-    {
-        // TODO: Implement changeAlgorithm() method.
-    }
-
-    /**
      * @param $algorithmName
      * @param $inputData
      */
     public static function run($algorithmName, $inputData)
     {
-        $algorithm = new AlgorithmBox($algorithmName);
+        $algorithm = new AlgorithmBox();
+        $algorithm->setName($algorithmName);
         $algorithm->setInputData($inputData);
+
         return $algorithm->run();
     }
 
+    /**
+     * @param $dirPath
+     */
+    public static function setAlgoDir($dirPath)
+    {
+        DI::get('parameters_bag')->set('algoDir', $dirPath);
+    }
+
+    /**
+     * @param $algoFile
+     * @return string
+     */
     public static function adaptAlgoToGoJS($algoFile)
     {
         $json = file_get_contents($algoFile);
@@ -62,6 +65,10 @@ class Avtomat implements ApiContract
         return json_encode($adaptedJson);
     }
 
+    /**
+     * @param $algoGOJS
+     * @param $algoPath
+     */
     public static function saveAlgoFromGOJS($algoGOJS, $algoPath)
     {
         $adapter = DI::get('json_adapter');
