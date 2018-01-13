@@ -81,6 +81,9 @@ class AlgorithmBox extends Box implements AlgorithmContract
         });
         $endBox = $this->findEnd();
 
+        /**
+         * TODO пофиксить фабрику, из за нее перетираются алгоритмы
+         */
         if ($this->getController()->getRelation($this, 'output')) {
             $this->getController()->go($this, 'output');
         } else {
