@@ -140,6 +140,15 @@ class Box implements BoxContract
     }
 
     /**
+     * @return mixed
+     */
+    public function getFirstArgument()
+    {
+
+        return $this->arguments ? array_shift($this->arguments) : '';
+    }
+
+    /**
      * @return string
      */
     public function getName()

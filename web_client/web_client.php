@@ -63,8 +63,6 @@ try {
         <script src="<?= $assetsDir ?>assets/functions.js"></script>
         <script id="code">
             var myDiagramLink;
-            var argumentsVue;
-            var test = 'test';
 
             function init() {
                 var $ = go.GraphObject.make;
@@ -92,10 +90,10 @@ try {
                     }
                 });
 
-                function makeTemplate(typename, icon, background, inports, outports) {
+                function makeTemplate(typename, argument, background, inports, outports) {
                     var node = $(go.Node, "Spot",
                         $(go.Panel, "Auto",
-                            {width: 120, height: 120},
+                            {width: 160, height: 120},
                             $(go.Shape, "Rectangle",
                                 {
                                     fill: background, stroke: null, strokeWidth: 0,
@@ -110,14 +108,14 @@ try {
                                         stroke: "white",
                                         font: "bold 11pt sans-serif"
                                     }),
-                                $(go.Picture, icon,
-                                    {row: 1, width: 55, height: 55}),
+                                $(go.Picture, '',
+                                    {row: 1, width: 35, height: 35}),
                                 $(go.TextBlock,
                                     {
                                         row: 2,
                                         margin: 3,
                                         editable: true,
-                                        maxSize: new go.Size(80, 40),
+                                        maxSize: new go.Size(100, 40),
                                         stroke: "white",
                                         font: "bold 9pt sans-serif"
                                     },
@@ -179,7 +177,7 @@ try {
                 <?php
                 foreach ($objects as $object) {
                 ?>
-                makeTemplate("<?= $object->getTitle() ?>", "", "<?= $object->getColor() ?>",
+                makeTemplate("<?= $object->getTitle() ?>", "<?= $object->getFirstArgument() ?>", "<?= $object->getColor() ?>",
                     [
                         <?php
                         $points = '';
@@ -364,7 +362,6 @@ try {
                     var parent = $(this).parent().find('.block_arguments')
                     var prevHtml = parent.html();
                     parent.html(prevHtml + '<input type="text" value="" />');
-                    console.log(prevHtml);
                 });
 
                 $('.save_argument').on('click', function () {

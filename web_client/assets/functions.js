@@ -59,6 +59,10 @@ function load() {
             if (data.nodeDataArray[i]['arguments'].length > 0) {
                 data.nodeDataArray[i]['name'] = data.nodeDataArray[i]['arguments'][0];
             }
+        } else {
+            if (data.nodeDataArray[i]['arguments'].length > 0) {
+                data.nodeDataArray[i]['name'] = data.nodeDataArray[i]['key'] + '\n(' + data.nodeDataArray[i]['arguments'][0] + ')';
+            }
         }
     }
     myDiagramLink.model =  data;
